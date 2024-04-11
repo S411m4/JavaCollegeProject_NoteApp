@@ -6,7 +6,6 @@ package finalproject;
 
 import customSwingComponents.ScrollBar;
 import java.awt.Color;
-import models.NoteModel;
 
 /**
  *
@@ -17,10 +16,10 @@ public class NotePanel extends javax.swing.JPanel {
     /**
      * Creates new form NotePanel
      */
-    public NotePanel(NoteModel noteInfo) {
+    public NotePanel() {
         initComponents();
-        contentAreaScrollPane.setVerticalScrollBar(new ScrollBar());
-        contentAreaScrollPane.getVerticalScrollBar().setBackground(Color.WHITE);
+        contentScroll.setVerticalScrollBar(new ScrollBar());
+        contentScroll.getVerticalScrollBar().setBackground(Color.WHITE);
     }
 
     /**
@@ -32,104 +31,38 @@ public class NotePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jToggleButton1 = new javax.swing.JToggleButton();
         panelBorder1 = new customSwingComponents.PanelBorder();
-        lastEditedDatePanel = new javax.swing.JPanel();
-        createdLabel1 = new javax.swing.JLabel();
-        creationDate1 = new javax.swing.JLabel();
-        createdDatePanel = new javax.swing.JPanel();
-        createdLabel = new javax.swing.JLabel();
-        creationDate = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        iconsPanel = new javax.swing.JPanel();
+        buttonsPanel = new javax.swing.JPanel();
+        screenshotBtn = new customSwingComponents.GradientButton();
         todoBtn = new customSwingComponents.GradientButton();
-        cameraBtn = new customSwingComponents.GradientButton();
         paintBtn = new customSwingComponents.GradientButton();
         homeBtn = new customSwingComponents.GradientButton();
-        contentAreaScrollPane = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
-
-        jToggleButton1.setText("jToggleButton1");
+        lastEditedPanel = new javax.swing.JPanel();
+        creationDate = new javax.swing.JLabel();
+        createdLabel = new javax.swing.JLabel();
+        dateCreatedPanel = new javax.swing.JPanel();
+        creationDate1 = new javax.swing.JLabel();
+        createdLabel1 = new javax.swing.JLabel();
+        title = new javax.swing.JLabel();
+        contentScroll = new javax.swing.JScrollPane();
+        content = new javax.swing.JTextArea();
 
         setOpaque(false);
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
-        lastEditedDatePanel.setOpaque(false);
+        buttonsPanel.setOpaque(false);
 
-        createdLabel1.setBackground(new java.awt.Color(204, 204, 204));
-        createdLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        createdLabel1.setForeground(new java.awt.Color(153, 153, 153));
-        createdLabel1.setText("Last Edited:");
+        screenshotBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cameraIcon.png"))); // NOI18N
+        screenshotBtn.setGradientColor1(new java.awt.Color(43, 41, 48));
+        screenshotBtn.setGradientColor2(new java.awt.Color(43, 41, 48));
+        screenshotBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                screenshotBtnActionPerformed(evt);
+            }
+        });
 
-        creationDate1.setBackground(new java.awt.Color(255, 255, 255));
-        creationDate1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        creationDate1.setForeground(new java.awt.Color(153, 153, 153));
-        creationDate1.setText("24/3/2024, 3:30 p.m.");
-
-        javax.swing.GroupLayout lastEditedDatePanelLayout = new javax.swing.GroupLayout(lastEditedDatePanel);
-        lastEditedDatePanel.setLayout(lastEditedDatePanelLayout);
-        lastEditedDatePanelLayout.setHorizontalGroup(
-            lastEditedDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(lastEditedDatePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(createdLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(creationDate1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
-        );
-        lastEditedDatePanelLayout.setVerticalGroup(
-            lastEditedDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(lastEditedDatePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(lastEditedDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(createdLabel1)
-                    .addComponent(creationDate1))
-                .addContainerGap())
-        );
-
-        createdDatePanel.setOpaque(false);
-
-        createdLabel.setBackground(new java.awt.Color(204, 204, 204));
-        createdLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        createdLabel.setForeground(new java.awt.Color(153, 153, 153));
-        createdLabel.setText("created: ");
-
-        creationDate.setBackground(new java.awt.Color(255, 255, 255));
-        creationDate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        creationDate.setForeground(new java.awt.Color(153, 153, 153));
-        creationDate.setText("24/3/2024, 3:30 p.m.");
-
-        javax.swing.GroupLayout createdDatePanelLayout = new javax.swing.GroupLayout(createdDatePanel);
-        createdDatePanel.setLayout(createdDatePanelLayout);
-        createdDatePanelLayout.setHorizontalGroup(
-            createdDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(createdDatePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(createdLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(creationDate, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        createdDatePanelLayout.setVerticalGroup(
-            createdDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(createdDatePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(createdDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(createdLabel)
-                    .addComponent(creationDate))
-                .addContainerGap())
-        );
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel1.setText("Title");
-
-        iconsPanel.setOpaque(false);
-
-        todoBtn.setBorder(null);
         todoBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/todoIcon.png"))); // NOI18N
-        todoBtn.setToolTipText("add todo checkbox");
         todoBtn.setGradientColor1(new java.awt.Color(43, 41, 48));
         todoBtn.setGradientColor2(new java.awt.Color(43, 41, 48));
         todoBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -138,20 +71,7 @@ public class NotePanel extends javax.swing.JPanel {
             }
         });
 
-        cameraBtn.setBorder(null);
-        cameraBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cameraIcon.png"))); // NOI18N
-        cameraBtn.setToolTipText("take screenshot to save paint");
-        cameraBtn.setGradientColor1(new java.awt.Color(43, 41, 48));
-        cameraBtn.setGradientColor2(new java.awt.Color(43, 41, 48));
-        cameraBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cameraBtnActionPerformed(evt);
-            }
-        });
-
-        paintBtn.setBorder(null);
         paintBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/paintIcon.png"))); // NOI18N
-        paintBtn.setToolTipText("paint tool");
         paintBtn.setGradientColor1(new java.awt.Color(43, 41, 48));
         paintBtn.setGradientColor2(new java.awt.Color(43, 41, 48));
         paintBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -160,9 +80,7 @@ public class NotePanel extends javax.swing.JPanel {
             }
         });
 
-        homeBtn.setBorder(null);
-        homeBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/menu.png"))); // NOI18N
-        homeBtn.setToolTipText("home");
+        homeBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/menuIcon.png"))); // NOI18N
         homeBtn.setGradientColor1(new java.awt.Color(43, 41, 48));
         homeBtn.setGradientColor2(new java.awt.Color(43, 41, 48));
         homeBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -171,132 +89,192 @@ public class NotePanel extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout iconsPanelLayout = new javax.swing.GroupLayout(iconsPanel);
-        iconsPanel.setLayout(iconsPanelLayout);
-        iconsPanelLayout.setHorizontalGroup(
-            iconsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(iconsPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout buttonsPanelLayout = new javax.swing.GroupLayout(buttonsPanel);
+        buttonsPanel.setLayout(buttonsPanelLayout);
+        buttonsPanelLayout.setHorizontalGroup(
+            buttonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(buttonsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(homeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cameraBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(paintBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(todoBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                .addComponent(todoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(screenshotBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(paintBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(homeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        iconsPanelLayout.setVerticalGroup(
-            iconsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(iconsPanelLayout.createSequentialGroup()
+        buttonsPanelLayout.setVerticalGroup(
+            buttonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(buttonsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(iconsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(paintBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(todoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cameraBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(homeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(buttonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(screenshotBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(todoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(paintBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(homeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        contentAreaScrollPane.setBorder(null);
-        contentAreaScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        contentAreaScrollPane.setHorizontalScrollBar(null);
+        lastEditedPanel.setOpaque(false);
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setLineWrap(true);
-        jTextArea2.setRows(5);
-        jTextArea2.setToolTipText("");
-        jTextArea2.setWrapStyleWord(true);
-        jTextArea2.setMinimumSize(new java.awt.Dimension(4, 4));
-        contentAreaScrollPane.setViewportView(jTextArea2);
+        creationDate.setFont(new java.awt.Font("Segoe Print", 0, 12)); // NOI18N
+        creationDate.setForeground(new java.awt.Color(153, 153, 153));
+        creationDate.setText("17/2/2024, 3:00 a.m.");
+
+        createdLabel.setFont(new java.awt.Font("Segoe Print", 0, 12)); // NOI18N
+        createdLabel.setForeground(new java.awt.Color(153, 153, 153));
+        createdLabel.setText("Last Edited:");
+
+        javax.swing.GroupLayout lastEditedPanelLayout = new javax.swing.GroupLayout(lastEditedPanel);
+        lastEditedPanel.setLayout(lastEditedPanelLayout);
+        lastEditedPanelLayout.setHorizontalGroup(
+            lastEditedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lastEditedPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(createdLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(creationDate, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        lastEditedPanelLayout.setVerticalGroup(
+            lastEditedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lastEditedPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(lastEditedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(creationDate)
+                    .addComponent(createdLabel))
+                .addContainerGap())
+        );
+
+        dateCreatedPanel.setOpaque(false);
+
+        creationDate1.setFont(new java.awt.Font("Segoe Print", 0, 12)); // NOI18N
+        creationDate1.setForeground(new java.awt.Color(153, 153, 153));
+        creationDate1.setText("17/2/2024, 3:00 a.m.");
+
+        createdLabel1.setFont(new java.awt.Font("Segoe Print", 0, 12)); // NOI18N
+        createdLabel1.setForeground(new java.awt.Color(153, 153, 153));
+        createdLabel1.setText("created:");
+
+        javax.swing.GroupLayout dateCreatedPanelLayout = new javax.swing.GroupLayout(dateCreatedPanel);
+        dateCreatedPanel.setLayout(dateCreatedPanelLayout);
+        dateCreatedPanelLayout.setHorizontalGroup(
+            dateCreatedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dateCreatedPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(createdLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(creationDate1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        dateCreatedPanelLayout.setVerticalGroup(
+            dateCreatedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dateCreatedPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dateCreatedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(creationDate1)
+                    .addComponent(createdLabel1))
+                .addContainerGap())
+        );
+
+        title.setFont(new java.awt.Font("Segoe Print", 1, 36)); // NOI18N
+        title.setForeground(new java.awt.Color(208, 208, 208));
+        title.setText("Title");
+
+        contentScroll.setBorder(null);
+        contentScroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        content.setColumns(20);
+        content.setLineWrap(true);
+        content.setRows(5);
+        content.setWrapStyleWord(true);
+        content.setBorder(null);
+        contentScroll.setViewportView(content);
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
         panelBorder1Layout.setHorizontalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(16, 16, 16)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addComponent(createdDatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lastEditedDatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(91, 91, 91)
-                        .addComponent(iconsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(contentAreaScrollPane)
+                        .addComponent(lastEditedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(36, 36, 36)
+                        .addComponent(dateCreatedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(94, 94, 94)
+                        .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(847, Short.MAX_VALUE))
+                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                        .addComponent(contentScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 1011, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lastEditedDatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(createdDatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(iconsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(12, 12, 12)
-                .addComponent(contentAreaScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(dateCreatedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lastEditedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(title)
+                .addGap(18, 18, 18)
+                .addComponent(contentScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void todoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_todoBtnActionPerformed
+    private void homeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeBtnActionPerformed
         // TODO add your handling code here:
-        //Add ToDo CheckBox
-    }//GEN-LAST:event_todoBtnActionPerformed
+    }//GEN-LAST:event_homeBtnActionPerformed
 
     private void paintBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paintBtnActionPerformed
         // TODO add your handling code here:
-        //open paint window
     }//GEN-LAST:event_paintBtnActionPerformed
 
-    private void cameraBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cameraBtnActionPerformed
+    private void todoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_todoBtnActionPerformed
         // TODO add your handling code here:
-        //take screen snap
-    }//GEN-LAST:event_cameraBtnActionPerformed
+    }//GEN-LAST:event_todoBtnActionPerformed
 
-    private void homeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeBtnActionPerformed
+    private void screenshotBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_screenshotBtnActionPerformed
         // TODO add your handling code here:
-        //goto home
-    }//GEN-LAST:event_homeBtnActionPerformed
+    }//GEN-LAST:event_screenshotBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private customSwingComponents.GradientButton cameraBtn;
-    private javax.swing.JScrollPane contentAreaScrollPane;
-    private javax.swing.JPanel createdDatePanel;
+    private javax.swing.JPanel buttonsPanel;
+    private javax.swing.JTextArea content;
+    private javax.swing.JScrollPane contentScroll;
     private javax.swing.JLabel createdLabel;
     private javax.swing.JLabel createdLabel1;
     private javax.swing.JLabel creationDate;
     private javax.swing.JLabel creationDate1;
+    private javax.swing.JPanel dateCreatedPanel;
     private customSwingComponents.GradientButton homeBtn;
-    private javax.swing.JPanel iconsPanel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JPanel lastEditedDatePanel;
+    private javax.swing.JPanel lastEditedPanel;
     private customSwingComponents.GradientButton paintBtn;
     private customSwingComponents.PanelBorder panelBorder1;
+    private customSwingComponents.GradientButton screenshotBtn;
+    private javax.swing.JLabel title;
     private customSwingComponents.GradientButton todoBtn;
     // End of variables declaration//GEN-END:variables
 }
