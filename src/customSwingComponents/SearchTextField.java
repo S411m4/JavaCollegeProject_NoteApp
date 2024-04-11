@@ -23,7 +23,15 @@ public class SearchTextField extends JTextField {
     }
 
     private final String hint = "Search here ...";
+    private Color color;
 
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
     @Override
     public void paint(Graphics g) {
         super.paint(g);
@@ -38,7 +46,7 @@ public class SearchTextField extends JTextField {
 //            int m = 0xfefefefe;
 //            int c2 = ((c0 & m) >>> 1) + ((c1 & m) >>> 1);
             //g.setColor(new Color(c2, true));
-            g.setColor(Color.GRAY);
+            g.setColor(getColor());
             g.drawString(hint, ins.left, h / 2 + fm.getAscent() / 2 - 2);
         }
     }
