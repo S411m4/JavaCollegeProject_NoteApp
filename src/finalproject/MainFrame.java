@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.markbean.smartnotes;
 
 import events.EventMenuSelected;
 import customSwingComponents.ScrollBar;
@@ -15,7 +14,6 @@ import javax.swing.JComponent;
  */
 public class MainFrame extends javax.swing.JFrame {
 
-    private HomePanel home;
 
     
     public MainFrame() {
@@ -23,13 +21,12 @@ public class MainFrame extends javax.swing.JFrame {
         setBackground(new Color(0, 0, 0, 0));
         menu.initMoving(MainFrame.this);
         
-        home = new HomePanel();
 
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
             public void selected(int index) {
-                if (index == 0) {
-                    setForm(home);}
+                //if (index == 0) {
+                  //  setForm(home);}
 //                } else if (index == 1) {
 //                    setForm(form1);
 //                } else if (index == 2) {
@@ -40,7 +37,6 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         
-       setForm(home);
     }
 
     private void setForm(JComponent com) {

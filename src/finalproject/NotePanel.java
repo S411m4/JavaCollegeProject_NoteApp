@@ -6,6 +6,7 @@ package finalproject;
 
 import customSwingComponents.ScrollBar;
 import java.awt.Color;
+import models.NoteModel;
 
 /**
  *
@@ -16,7 +17,7 @@ public class NotePanel extends javax.swing.JPanel {
     /**
      * Creates new form NotePanel
      */
-    public NotePanel() {
+    public NotePanel(NoteModel noteInfo) {
         initComponents();
         contentAreaScrollPane.setVerticalScrollBar(new ScrollBar());
         contentAreaScrollPane.getVerticalScrollBar().setBackground(Color.WHITE);
@@ -44,7 +45,7 @@ public class NotePanel extends javax.swing.JPanel {
         todoBtn = new customSwingComponents.GradientButton();
         cameraBtn = new customSwingComponents.GradientButton();
         paintBtn = new customSwingComponents.GradientButton();
-        menuBtn = new customSwingComponents.GradientButton();
+        homeBtn = new customSwingComponents.GradientButton();
         contentAreaScrollPane = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
 
@@ -128,6 +129,7 @@ public class NotePanel extends javax.swing.JPanel {
 
         todoBtn.setBorder(null);
         todoBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/todoIcon.png"))); // NOI18N
+        todoBtn.setToolTipText("add todo checkbox");
         todoBtn.setGradientColor1(new java.awt.Color(43, 41, 48));
         todoBtn.setGradientColor2(new java.awt.Color(43, 41, 48));
         todoBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -138,6 +140,7 @@ public class NotePanel extends javax.swing.JPanel {
 
         cameraBtn.setBorder(null);
         cameraBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cameraIcon.png"))); // NOI18N
+        cameraBtn.setToolTipText("take screenshot to save paint");
         cameraBtn.setGradientColor1(new java.awt.Color(43, 41, 48));
         cameraBtn.setGradientColor2(new java.awt.Color(43, 41, 48));
         cameraBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -148,6 +151,7 @@ public class NotePanel extends javax.swing.JPanel {
 
         paintBtn.setBorder(null);
         paintBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/paintIcon.png"))); // NOI18N
+        paintBtn.setToolTipText("paint tool");
         paintBtn.setGradientColor1(new java.awt.Color(43, 41, 48));
         paintBtn.setGradientColor2(new java.awt.Color(43, 41, 48));
         paintBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -156,13 +160,14 @@ public class NotePanel extends javax.swing.JPanel {
             }
         });
 
-        menuBtn.setBorder(null);
-        menuBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/menu.png"))); // NOI18N
-        menuBtn.setGradientColor1(new java.awt.Color(43, 41, 48));
-        menuBtn.setGradientColor2(new java.awt.Color(43, 41, 48));
-        menuBtn.addActionListener(new java.awt.event.ActionListener() {
+        homeBtn.setBorder(null);
+        homeBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/menu.png"))); // NOI18N
+        homeBtn.setToolTipText("home");
+        homeBtn.setGradientColor1(new java.awt.Color(43, 41, 48));
+        homeBtn.setGradientColor2(new java.awt.Color(43, 41, 48));
+        homeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuBtnActionPerformed(evt);
+                homeBtnActionPerformed(evt);
             }
         });
 
@@ -172,13 +177,13 @@ public class NotePanel extends javax.swing.JPanel {
             iconsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(iconsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(menuBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(homeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cameraBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cameraBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(paintBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(paintBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(todoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(todoBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
                 .addContainerGap())
         );
         iconsPanelLayout.setVerticalGroup(
@@ -189,7 +194,7 @@ public class NotePanel extends javax.swing.JPanel {
                     .addComponent(paintBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(todoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cameraBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(menuBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(homeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -198,7 +203,11 @@ public class NotePanel extends javax.swing.JPanel {
         contentAreaScrollPane.setHorizontalScrollBar(null);
 
         jTextArea2.setColumns(20);
+        jTextArea2.setLineWrap(true);
         jTextArea2.setRows(5);
+        jTextArea2.setToolTipText("");
+        jTextArea2.setWrapStyleWord(true);
+        jTextArea2.setMinimumSize(new java.awt.Dimension(4, 4));
         contentAreaScrollPane.setViewportView(jTextArea2);
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
@@ -206,18 +215,18 @@ public class NotePanel extends javax.swing.JPanel {
         panelBorder1Layout.setHorizontalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(18, 18, 18)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addComponent(createdDatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lastEditedDatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(103, 103, 103)
+                        .addComponent(createdDatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lastEditedDatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(91, 91, 91)
                         .addComponent(iconsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(contentAreaScrollPane)
                     .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(contentAreaScrollPane))
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelBorder1Layout.setVerticalGroup(
@@ -225,18 +234,18 @@ public class NotePanel extends javax.swing.JPanel {
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
+                        .addGap(63, 63, 63)
                         .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lastEditedDatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(createdDatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lastEditedDatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(createdDatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(panelBorder1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(iconsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
+                        .addComponent(iconsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contentAreaScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
+                .addComponent(contentAreaScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -253,19 +262,23 @@ public class NotePanel extends javax.swing.JPanel {
 
     private void todoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_todoBtnActionPerformed
         // TODO add your handling code here:
+        //Add ToDo CheckBox
     }//GEN-LAST:event_todoBtnActionPerformed
 
     private void paintBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paintBtnActionPerformed
         // TODO add your handling code here:
+        //open paint window
     }//GEN-LAST:event_paintBtnActionPerformed
 
     private void cameraBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cameraBtnActionPerformed
         // TODO add your handling code here:
+        //take screen snap
     }//GEN-LAST:event_cameraBtnActionPerformed
 
-    private void menuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBtnActionPerformed
+    private void homeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_menuBtnActionPerformed
+        //goto home
+    }//GEN-LAST:event_homeBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -276,12 +289,12 @@ public class NotePanel extends javax.swing.JPanel {
     private javax.swing.JLabel createdLabel1;
     private javax.swing.JLabel creationDate;
     private javax.swing.JLabel creationDate1;
+    private customSwingComponents.GradientButton homeBtn;
     private javax.swing.JPanel iconsPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JPanel lastEditedDatePanel;
-    private customSwingComponents.GradientButton menuBtn;
     private customSwingComponents.GradientButton paintBtn;
     private customSwingComponents.PanelBorder panelBorder1;
     private customSwingComponents.GradientButton todoBtn;
