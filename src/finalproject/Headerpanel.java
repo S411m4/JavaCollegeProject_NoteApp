@@ -18,6 +18,11 @@ public class Headerpanel extends javax.swing.JPanel {
         this.homeFrame = homeFrame;
         initComponents();
     }
+    
+    public Headerpanel()
+    {
+        initComponents();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

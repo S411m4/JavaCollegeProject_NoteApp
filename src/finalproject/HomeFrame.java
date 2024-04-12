@@ -46,6 +46,8 @@ public class HomeFrame extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(400, 400));
+        setPreferredSize(new java.awt.Dimension(800, 1000));
 
         mainPanel.setOpaque(false);
         mainPanel.setLayout(new java.awt.BorderLayout());
