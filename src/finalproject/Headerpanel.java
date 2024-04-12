@@ -9,11 +9,13 @@ package finalproject;
  * @author salma
  */
 public class Headerpanel extends javax.swing.JPanel {
+    private HomeFrame homeFrame;
 
     /**
      * Creates new form Headerpanel
      */
-    public Headerpanel() {
+    public Headerpanel(HomeFrame homeFrame) {
+        this.homeFrame = homeFrame;
         initComponents();
     }
 
@@ -38,6 +40,9 @@ public class Headerpanel extends javax.swing.JPanel {
         roundedButton1.setForeground(new java.awt.Color(103, 80, 164));
         roundedButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/plus.png"))); // NOI18N
         roundedButton1.setBorderColor(new java.awt.Color(103, 80, 164));
+        roundedButton1.setColor(new java.awt.Color(103, 80, 164));
+        roundedButton1.setColorClick(new java.awt.Color(102, 0, 153));
+        roundedButton1.setColorOver(new java.awt.Color(51, 0, 102));
         roundedButton1.setRadius(15);
         roundedButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,6 +84,7 @@ public class Headerpanel extends javax.swing.JPanel {
 
     private void roundedButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roundedButton1ActionPerformed
         // TODO add your handling code here:
+        homeFrame.setPage(new NotePanel());
     }//GEN-LAST:event_roundedButton1ActionPerformed
 
 

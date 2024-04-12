@@ -9,11 +9,13 @@ package finalproject;
  * @author salma
  */
 public class HomePanel extends javax.swing.JPanel {
+    private HomeFrame homeFrame;
 
     /**
      * Creates new form HomePanel
      */
-    public HomePanel() {
+    public HomePanel(HomeFrame homeFrame) {
+        this.homeFrame = homeFrame;
         initComponents();
     }
 
@@ -28,7 +30,7 @@ public class HomePanel extends javax.swing.JPanel {
 
         userPanel1 = new finalproject.UserPanel();
         dateTimePanel1 = new finalproject.DateTimePanel();
-        headerpanel1 = new finalproject.Headerpanel();
+        headerpanel2 = new finalproject.Headerpanel(homeFrame);
 
         setOpaque(false);
 
@@ -36,18 +38,20 @@ public class HomePanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dateTimePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1047, Short.MAX_VALUE)
+            .addComponent(dateTimePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(userPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(headerpanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(headerpanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(userPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
-                    .addComponent(headerpanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(headerpanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dateTimePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
                 .addGap(0, 324, Short.MAX_VALUE))
@@ -57,7 +61,7 @@ public class HomePanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private finalproject.DateTimePanel dateTimePanel1;
-    private finalproject.Headerpanel headerpanel1;
+    private finalproject.Headerpanel headerpanel2;
     private finalproject.UserPanel userPanel1;
     // End of variables declaration//GEN-END:variables
 }
