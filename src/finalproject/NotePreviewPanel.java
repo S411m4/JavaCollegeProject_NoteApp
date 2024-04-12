@@ -42,12 +42,14 @@ public class NotePreviewPanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         editBtn = new customSwingComponents.GradientButton();
         noteTitle = new javax.swing.JLabel();
+        deleteNoteBtn = new customSwingComponents.GradientButton();
 
         jToggleButton1.setText("jToggleButton1");
 
         setOpaque(false);
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
+        panelBorder1.setRadius(30);
 
         lastEditedDatePanel.setOpaque(false);
 
@@ -120,6 +122,8 @@ public class NotePreviewPanel extends javax.swing.JPanel {
         noteContent.setWrapStyleWord(true);
         noteContent.setBorder(null);
 
+        jPanel1.setOpaque(false);
+
         editBtn.setBorder(null);
         editBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/editIcon.png"))); // NOI18N
         editBtn.setToolTipText("home");
@@ -135,6 +139,17 @@ public class NotePreviewPanel extends javax.swing.JPanel {
         noteTitle.setForeground(new java.awt.Color(204, 204, 204));
         noteTitle.setText("Title");
 
+        deleteNoteBtn.setBorder(null);
+        deleteNoteBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/tabler_trash.png"))); // NOI18N
+        deleteNoteBtn.setToolTipText("home");
+        deleteNoteBtn.setGradientColor1(new java.awt.Color(43, 41, 48));
+        deleteNoteBtn.setGradientColor2(new java.awt.Color(43, 41, 48));
+        deleteNoteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteNoteBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -144,18 +159,21 @@ public class NotePreviewPanel extends javax.swing.JPanel {
                 .addComponent(noteTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(deleteNoteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(noteTitle)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(noteTitle))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(deleteNoteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(8, 8, 8)))
                 .addContainerGap())
         );
 
@@ -171,8 +189,10 @@ public class NotePreviewPanel extends javax.swing.JPanel {
                         .addComponent(createdDatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lastEditedDatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 309, Short.MAX_VALUE))
-                    .addComponent(noteContent))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE))
+                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                        .addComponent(noteContent, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 85, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelBorder1Layout.setVerticalGroup(
@@ -185,8 +205,8 @@ public class NotePreviewPanel extends javax.swing.JPanel {
                     .addComponent(createdDatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lastEditedDatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(noteContent, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 2, Short.MAX_VALUE))
+                .addComponent(noteContent, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -206,6 +226,10 @@ public class NotePreviewPanel extends javax.swing.JPanel {
         //goto home
     }//GEN-LAST:event_editBtnActionPerformed
 
+    private void deleteNoteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteNoteBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteNoteBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel createdDatePanel;
@@ -213,6 +237,7 @@ public class NotePreviewPanel extends javax.swing.JPanel {
     private javax.swing.JLabel createdLabel1;
     private javax.swing.JLabel creationDate;
     private javax.swing.JLabel creationDate1;
+    private customSwingComponents.GradientButton deleteNoteBtn;
     private customSwingComponents.GradientButton editBtn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToggleButton jToggleButton1;

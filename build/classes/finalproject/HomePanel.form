@@ -19,33 +19,38 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="dateTimePanel1" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
-              <Component id="userPanel1" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="dateTimePanel1" alignment="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="userPanel1" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="toDoPanel1" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="headerpanel2" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="toDoPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="headerpanel2" pref="941" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="notesPreviewPanel1" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="userPanel1" pref="311" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="headerpanel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-              </Group>
+              <Component id="userPanel1" pref="311" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="dateTimePanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="toDoPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="headerpanel2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="notesPreviewPanel1" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -61,6 +66,8 @@
       </AuxValues>
     </Component>
     <Component class="finalproject.ToDoPanel" name="toDoPanel1">
+    </Component>
+    <Component class="finalproject.NotesPreviewPanel" name="notesPreviewPanel1">
     </Component>
   </SubComponents>
 </Form>

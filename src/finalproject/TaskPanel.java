@@ -39,6 +39,9 @@ public class TaskPanel extends javax.swing.JPanel {
 
         setOpaque(false);
 
+        taskDone.setBackground(new java.awt.Color(208, 188, 255));
+        taskDone.setForeground(new java.awt.Color(56, 30, 114));
+        taskDone.setBorder(null);
         taskDone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 taskDoneActionPerformed(evt);
@@ -60,7 +63,7 @@ public class TaskPanel extends javax.swing.JPanel {
                 .addComponent(taskString, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(taskDone)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -68,7 +71,7 @@ public class TaskPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(taskString)
-                    .addComponent(taskDone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(taskDone))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
