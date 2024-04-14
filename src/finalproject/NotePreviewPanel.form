@@ -55,7 +55,7 @@
                           <Component id="createdDatePanel" max="32767" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="lastEditedDatePanel" max="32767" attributes="0"/>
-                          <EmptySpace pref="73" max="32767" attributes="0"/>
+                          <EmptySpace pref="10" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="noteContent" min="-2" pref="571" max="-2" attributes="0"/>
@@ -94,9 +94,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="createdLabel1" min="-2" pref="75" max="-2" attributes="0"/>
+                      <Component id="createdDateLabel" min="-2" pref="75" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="creationDate1" min="-2" pref="193" max="-2" attributes="0"/>
+                      <Component id="createdDate" min="-2" pref="261" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -106,8 +106,8 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="createdLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="creationDate1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="createdDateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="createdDate" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -115,7 +115,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="createdLabel1">
+            <Component class="javax.swing.JLabel" name="createdDateLabel">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -126,10 +126,10 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="99" green="99" red="99" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Last Edited:"/>
+                <Property name="text" type="java.lang.String" value="created:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="creationDate1">
+            <Component class="javax.swing.JLabel" name="createdDate">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -155,9 +155,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="createdLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="lastEditedLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="creationDate" min="-2" pref="167" max="-2" attributes="0"/>
+                      <Component id="lastEdited" min="-2" pref="190" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -167,8 +167,8 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="createdLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="creationDate" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lastEditedLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lastEdited" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -176,7 +176,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="createdLabel">
+            <Component class="javax.swing.JLabel" name="lastEditedLabel">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -187,10 +187,10 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="99" green="99" red="99" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="created: "/>
+                <Property name="text" type="java.lang.String" value="Last Edited:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="creationDate">
+            <Component class="javax.swing.JLabel" name="lastEdited">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -226,7 +226,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="noteTitle" min="-2" pref="304" max="-2" attributes="0"/>
+                      <Component id="noteTitle" min="-2" pref="486" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="editBtn" min="-2" pref="48" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>

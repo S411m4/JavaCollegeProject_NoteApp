@@ -4,7 +4,10 @@
  */
 package finalproject;
 
+import DatabaseHelpers.DatabaseHelper;
 import customSwingComponents.ScrollBar;
+import java.util.ArrayList;
+import models.NoteModel;
 import models.TaskModel;
 import net.miginfocom.swing.MigLayout;
 
@@ -12,30 +15,35 @@ import net.miginfocom.swing.MigLayout;
  *
  * @author salma
  */
-public class NotesPreviewPanel extends javax.swing.JPanel {
+public class NotesPreviewScrollPanel extends javax.swing.JPanel {
 
+    public static NotesPreviewScrollPanel Instance;
     /**
      * Creates new form ToDoPanel
      */
-    public NotesPreviewPanel() {
+    public NotesPreviewScrollPanel() {
+        Instance = this;
         initComponents();
         notesPreviewScrollPanel.setVerticalScrollBar(new ScrollBar());
         notesPreviewScrollPanel.getVerticalScrollBar().setBackground(getBackground());
         notesPreviewScrollPanel.getViewport().setOpaque(false);
         notesPreviewScrollPanel.setViewportBorder(null);
         notesPreviewList.setLayout(new MigLayout("inset 0, fillx, wrap", "[fill]"));
+        
 
-        notesPreviewList.add(new NotePreviewPanel());
-        notesPreviewList.add(new NotePreviewPanel());
-        notesPreviewList.add(new NotePreviewPanel());
-        notesPreviewList.add(new NotePreviewPanel());
-        notesPreviewList.add(new NotePreviewPanel());
-        notesPreviewList.add(new NotePreviewPanel());
-        notesPreviewList.add(new NotePreviewPanel());
-        notesPreviewList.add(new NotePreviewPanel());
-        notesPreviewList.add(new NotePreviewPanel());
-        notesPreviewList.add(new NotePreviewPanel());
 
+    }
+    
+    public void loadNotes()
+    {
+        notesPreviewList.removeAll();
+        for(NoteModel note : DatabaseHelper.notes)
+        {
+            notesPreviewList.add(new NotePreviewPanel(note));
+            //System.out.println("Loaded: " + note);
+        }
+        revalidate();
+        repaint();
     }
 
     /**
@@ -64,6 +72,11 @@ public class NotesPreviewPanel extends javax.swing.JPanel {
         notesPreviewList.setBackground(new java.awt.Color(20, 18, 24));
         notesPreviewList.setForeground(new java.awt.Color(20, 18, 24));
         notesPreviewList.setOpaque(false);
+        notesPreviewList.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                notesPreviewListComponentShown(evt);
+            }
+        });
 
         javax.swing.GroupLayout notesPreviewListLayout = new javax.swing.GroupLayout(notesPreviewList);
         notesPreviewList.setLayout(notesPreviewListLayout);
@@ -106,6 +119,11 @@ public class NotesPreviewPanel extends javax.swing.JPanel {
             .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void notesPreviewListComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_notesPreviewListComponentShown
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_notesPreviewListComponentShown
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

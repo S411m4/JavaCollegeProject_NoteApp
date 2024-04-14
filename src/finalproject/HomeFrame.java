@@ -4,7 +4,9 @@
  */
 package finalproject;
 
+import DatabaseHelpers.DatabaseHelper;
 import javax.swing.JComponent;
+import models.NoteModel;
 
 /**
  *
@@ -12,26 +14,34 @@ import javax.swing.JComponent;
  */
 public class HomeFrame extends javax.swing.JFrame {
 
-    private HomePanel homePanel;
+    public static HomePanel homePanel;
+    public static HomeFrame Instance; //singleton
 
     /**
      * Creates new form HomeFrame
      */
     public HomeFrame() {
+        Instance = this;
+        homePanel = new HomePanel();
         initComponents();
-        homePanel = new HomePanel(this);
         setPage(homePanel);
+        NotesPreviewScrollPanel.Instance.loadNotes();
         
-
     }
 
     public void setPage(JComponent com) {
         mainPanel.removeAll();
         mainPanel.add(com);
+//        System.out.println("setting: " + com.toString());
         mainPanel.repaint();
         mainPanel.revalidate();
-        System.out.println("setting: " + com.toString());
+    }
 
+    public JComponent getHomePanel() {
+        if (homePanel == null) {
+            homePanel = new HomePanel();
+        }
+        return homePanel;
     }
 
     /**
@@ -48,6 +58,11 @@ public class HomeFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(400, 400));
         setPreferredSize(new java.awt.Dimension(800, 1000));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         mainPanel.setOpaque(false);
         mainPanel.setLayout(new java.awt.BorderLayout());
@@ -68,6 +83,11 @@ public class HomeFrame extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        //currentNote.save();
+        evt.getWindow().dispose();
+    }//GEN-LAST:event_formWindowClosing
 
     public void runClass() {
         /* Set the Nimbus look and feel */

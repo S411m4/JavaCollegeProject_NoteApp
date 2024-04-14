@@ -16,7 +16,7 @@ public class FinalProject {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        DatabaseHelper.createNewTable();
+        DatabaseHelper.setupDatabase();
        HomeFrame home = new HomeFrame();
        home.runClass();
     }

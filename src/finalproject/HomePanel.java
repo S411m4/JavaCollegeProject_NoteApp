@@ -9,13 +9,15 @@ package finalproject;
  * @author salma
  */
 public class HomePanel extends javax.swing.JPanel {
-    private HomeFrame homeFrame;
 
     /**
      * Creates new form HomePanel
      */
-    public HomePanel(HomeFrame homeFrame) {
-        this.homeFrame = homeFrame;
+    
+    //ToDo add delete in:
+    //home panel set active true
+    //delete note
+    public HomePanel() {
         initComponents();
     }
 
@@ -30,22 +32,27 @@ public class HomePanel extends javax.swing.JPanel {
 
         userPanel1 = new finalproject.UserPanel();
         dateTimePanel1 = new finalproject.DateTimePanel();
-        headerpanel2 = new finalproject.Headerpanel(homeFrame);
+        headerpanel2 = new finalproject.Headerpanel();
         toDoPanel1 = new finalproject.ToDoPanel();
-        notesPreviewPanel1 = new finalproject.NotesPreviewPanel();
+        notesPreviewPanel1 = new finalproject.NotesPreviewScrollPanel();
 
         setOpaque(false);
+
+        notesPreviewPanel1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                notesPreviewPanel1ComponentShown(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(dateTimePanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(userPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(toDoPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(dateTimePanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(userPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(toDoPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(headerpanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 941, Short.MAX_VALUE)
@@ -56,7 +63,7 @@ public class HomePanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(userPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
+                .addComponent(userPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dateTimePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -68,11 +75,15 @@ public class HomePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void notesPreviewPanel1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_notesPreviewPanel1ComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_notesPreviewPanel1ComponentShown
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private finalproject.DateTimePanel dateTimePanel1;
     private finalproject.Headerpanel headerpanel2;
-    private finalproject.NotesPreviewPanel notesPreviewPanel1;
+    private finalproject.NotesPreviewScrollPanel notesPreviewPanel1;
     private finalproject.ToDoPanel toDoPanel1;
     private finalproject.UserPanel userPanel1;
     // End of variables declaration//GEN-END:variables

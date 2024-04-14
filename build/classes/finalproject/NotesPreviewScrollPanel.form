@@ -85,6 +85,9 @@
                 </Property>
                 <Property name="opaque" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="notesPreviewListComponentShown"/>
+              </Events>
 
               <Layout>
                 <DimensionLayout dim="0">

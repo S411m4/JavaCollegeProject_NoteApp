@@ -4,20 +4,19 @@
  */
 package finalproject;
 
+import DatabaseHelpers.DatabaseHelper;
+import models.NoteModel;
+
 /**
  *
  * @author salma
  */
 public class Headerpanel extends javax.swing.JPanel {
-    private HomeFrame homeFrame;
+    //private HomeFrame homeFrame;
 
     /**
      * Creates new form Headerpanel
      */
-    public Headerpanel(HomeFrame homeFrame) {
-        this.homeFrame = homeFrame;
-        initComponents();
-    }
     
     public Headerpanel()
     {
@@ -34,24 +33,24 @@ public class Headerpanel extends javax.swing.JPanel {
     private void initComponents() {
 
         panelBorder1 = new customSwingComponents.PanelBorder();
-        roundedButton1 = new com.markbean.notes.customGUIComponents.RoundedButton();
+        addNoteBtn = new com.markbean.notes.customGUIComponents.RoundedButton();
 
         setOpaque(false);
 
         panelBorder1.setBackground(new java.awt.Color(20, 18, 24));
 
-        roundedButton1.setBackground(new java.awt.Color(103, 80, 164));
-        roundedButton1.setBorder(null);
-        roundedButton1.setForeground(new java.awt.Color(103, 80, 164));
-        roundedButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/plus.png"))); // NOI18N
-        roundedButton1.setBorderColor(new java.awt.Color(103, 80, 164));
-        roundedButton1.setColor(new java.awt.Color(103, 80, 164));
-        roundedButton1.setColorClick(new java.awt.Color(102, 0, 153));
-        roundedButton1.setColorOver(new java.awt.Color(51, 0, 102));
-        roundedButton1.setRadius(15);
-        roundedButton1.addActionListener(new java.awt.event.ActionListener() {
+        addNoteBtn.setBackground(new java.awt.Color(103, 80, 164));
+        addNoteBtn.setBorder(null);
+        addNoteBtn.setForeground(new java.awt.Color(103, 80, 164));
+        addNoteBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/plus.png"))); // NOI18N
+        addNoteBtn.setBorderColor(new java.awt.Color(103, 80, 164));
+        addNoteBtn.setColor(new java.awt.Color(103, 80, 164));
+        addNoteBtn.setColorClick(new java.awt.Color(102, 0, 153));
+        addNoteBtn.setColorOver(new java.awt.Color(51, 0, 102));
+        addNoteBtn.setRadius(15);
+        addNoteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                roundedButton1ActionPerformed(evt);
+                addNoteBtnActionPerformed(evt);
             }
         });
 
@@ -61,14 +60,14 @@ public class Headerpanel extends javax.swing.JPanel {
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(roundedButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(addNoteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(562, Short.MAX_VALUE))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(roundedButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(addNoteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -87,14 +86,15 @@ public class Headerpanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void roundedButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roundedButton1ActionPerformed
-        // TODO add your handling code here:
-        homeFrame.setPage(new NotePanel());
-    }//GEN-LAST:event_roundedButton1ActionPerformed
+    private void addNoteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNoteBtnActionPerformed
+        //homeFrame.setPage(new NotePanel(new NoteModel(), homeFrame));
+        HomeFrame.Instance.setPage(new NotePanel(new NoteModel()));
+       
+    }//GEN-LAST:event_addNoteBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.markbean.notes.customGUIComponents.RoundedButton addNoteBtn;
     private customSwingComponents.PanelBorder panelBorder1;
-    private com.markbean.notes.customGUIComponents.RoundedButton roundedButton1;
     // End of variables declaration//GEN-END:variables
 }

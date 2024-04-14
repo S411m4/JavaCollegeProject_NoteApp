@@ -20,12 +20,10 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="dateTimePanel1" alignment="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="userPanel1" alignment="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Component id="toDoPanel1" alignment="0" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="dateTimePanel1" alignment="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="userPanel1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="toDoPanel1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -41,7 +39,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="userPanel1" pref="311" max="32767" attributes="0"/>
+              <Component id="userPanel1" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="dateTimePanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -61,13 +59,13 @@
     <Component class="finalproject.DateTimePanel" name="dateTimePanel1">
     </Component>
     <Component class="finalproject.Headerpanel" name="headerpanel2">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new finalproject.Headerpanel(homeFrame)"/>
-      </AuxValues>
     </Component>
     <Component class="finalproject.ToDoPanel" name="toDoPanel1">
     </Component>
-    <Component class="finalproject.NotesPreviewPanel" name="notesPreviewPanel1">
+    <Component class="finalproject.NotesPreviewScrollPanel" name="notesPreviewPanel1">
+      <Events>
+        <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="notesPreviewPanel1ComponentShown"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

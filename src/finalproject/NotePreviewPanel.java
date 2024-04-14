@@ -4,8 +4,12 @@
  */
 package finalproject;
 
+import DatabaseHelpers.DatabaseHelper;
 import customSwingComponents.ScrollBar;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import javax.swing.JOptionPane;
 import models.NoteModel;
 
 /**
@@ -14,11 +18,50 @@ import models.NoteModel;
  */
 public class NotePreviewPanel extends javax.swing.JPanel {
 
+    private NoteModel note;
     /**
      * Creates new form NotePanel
      */
-    public NotePreviewPanel() {
+    public NotePreviewPanel(NoteModel note) {
+        this.note = note;
         initComponents();
+        noteTitle.setText(note.getTitle());
+        noteContent.setText(note.getContent());
+        String lastEditedDateString = note.getLastEditedDate() == null ? note.getCreatedDate() : note.getLastEditedDate();
+        lastEdited.setText(lastEditedDateString);
+        createdDate.setText(note.getCreatedDate());
+        
+           noteContent.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // Check if Ctrl+S is pressed
+                if (e.getKeyCode() == KeyEvent.VK_S && e.isControlDown()) {
+                    // Call your Create function here
+                    //System.out.println("Save from shortcut");
+                    save();
+                }
+
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    //System.out.println("AutoSave");
+                    save();
+                }
+            }
+        });
+    }
+    
+    
+    private void save() {
+        note.setTitle(noteTitle.getText());
+        note.setContent(noteContent.getText());
+        note.Save();
     }
 
     /**
@@ -33,11 +76,11 @@ public class NotePreviewPanel extends javax.swing.JPanel {
         jToggleButton1 = new javax.swing.JToggleButton();
         panelBorder1 = new customSwingComponents.PanelBorder();
         lastEditedDatePanel = new javax.swing.JPanel();
-        createdLabel1 = new javax.swing.JLabel();
-        creationDate1 = new javax.swing.JLabel();
+        createdDateLabel = new javax.swing.JLabel();
+        createdDate = new javax.swing.JLabel();
         createdDatePanel = new javax.swing.JPanel();
-        createdLabel = new javax.swing.JLabel();
-        creationDate = new javax.swing.JLabel();
+        lastEditedLabel = new javax.swing.JLabel();
+        lastEdited = new javax.swing.JLabel();
         noteContent = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
         editBtn = new customSwingComponents.GradientButton();
@@ -53,15 +96,15 @@ public class NotePreviewPanel extends javax.swing.JPanel {
 
         lastEditedDatePanel.setOpaque(false);
 
-        createdLabel1.setBackground(new java.awt.Color(204, 204, 204));
-        createdLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        createdLabel1.setForeground(new java.awt.Color(153, 153, 153));
-        createdLabel1.setText("Last Edited:");
+        createdDateLabel.setBackground(new java.awt.Color(204, 204, 204));
+        createdDateLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        createdDateLabel.setForeground(new java.awt.Color(153, 153, 153));
+        createdDateLabel.setText("created:");
 
-        creationDate1.setBackground(new java.awt.Color(255, 255, 255));
-        creationDate1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        creationDate1.setForeground(new java.awt.Color(153, 153, 153));
-        creationDate1.setText("24/3/2024, 3:30 p.m.");
+        createdDate.setBackground(new java.awt.Color(255, 255, 255));
+        createdDate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        createdDate.setForeground(new java.awt.Color(153, 153, 153));
+        createdDate.setText("24/3/2024, 3:30 p.m.");
 
         javax.swing.GroupLayout lastEditedDatePanelLayout = new javax.swing.GroupLayout(lastEditedDatePanel);
         lastEditedDatePanel.setLayout(lastEditedDatePanelLayout);
@@ -69,9 +112,9 @@ public class NotePreviewPanel extends javax.swing.JPanel {
             lastEditedDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lastEditedDatePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(createdLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(createdDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(creationDate1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(createdDate, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         lastEditedDatePanelLayout.setVerticalGroup(
@@ -79,22 +122,22 @@ public class NotePreviewPanel extends javax.swing.JPanel {
             .addGroup(lastEditedDatePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(lastEditedDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(createdLabel1)
-                    .addComponent(creationDate1))
+                    .addComponent(createdDateLabel)
+                    .addComponent(createdDate))
                 .addContainerGap())
         );
 
         createdDatePanel.setOpaque(false);
 
-        createdLabel.setBackground(new java.awt.Color(204, 204, 204));
-        createdLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        createdLabel.setForeground(new java.awt.Color(153, 153, 153));
-        createdLabel.setText("created: ");
+        lastEditedLabel.setBackground(new java.awt.Color(204, 204, 204));
+        lastEditedLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lastEditedLabel.setForeground(new java.awt.Color(153, 153, 153));
+        lastEditedLabel.setText("Last Edited:");
 
-        creationDate.setBackground(new java.awt.Color(255, 255, 255));
-        creationDate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        creationDate.setForeground(new java.awt.Color(153, 153, 153));
-        creationDate.setText("24/3/2024, 3:30 p.m.");
+        lastEdited.setBackground(new java.awt.Color(255, 255, 255));
+        lastEdited.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lastEdited.setForeground(new java.awt.Color(153, 153, 153));
+        lastEdited.setText("24/3/2024, 3:30 p.m.");
 
         javax.swing.GroupLayout createdDatePanelLayout = new javax.swing.GroupLayout(createdDatePanel);
         createdDatePanel.setLayout(createdDatePanelLayout);
@@ -102,9 +145,9 @@ public class NotePreviewPanel extends javax.swing.JPanel {
             createdDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(createdDatePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(createdLabel)
+                .addComponent(lastEditedLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(creationDate, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lastEdited, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         createdDatePanelLayout.setVerticalGroup(
@@ -112,8 +155,8 @@ public class NotePreviewPanel extends javax.swing.JPanel {
             .addGroup(createdDatePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(createdDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(createdLabel)
-                    .addComponent(creationDate))
+                    .addComponent(lastEditedLabel)
+                    .addComponent(lastEdited))
                 .addContainerGap())
         );
 
@@ -156,7 +199,7 @@ public class NotePreviewPanel extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(noteTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(noteTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -189,7 +232,7 @@ public class NotePreviewPanel extends javax.swing.JPanel {
                         .addComponent(createdDatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lastEditedDatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE))
                     .addGroup(panelBorder1Layout.createSequentialGroup()
                         .addComponent(noteContent, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 85, Short.MAX_VALUE)))
@@ -224,24 +267,33 @@ public class NotePreviewPanel extends javax.swing.JPanel {
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
         // TODO add your handling code here:
         //goto home
+        HomeFrame.Instance.setPage(new NotePanel(this.note));
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void deleteNoteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteNoteBtnActionPerformed
-        // TODO add your handling code here:
+        
+        String answer = JOptionPane.showInputDialog(this, "Enter delete to (delete) note: ");
+        if(answer.toLowerCase().compareTo("delete") == 0)
+        {
+          note.Delete();
+            NotesPreviewScrollPanel.Instance.loadNotes();   
+        }
+        
+       
     }//GEN-LAST:event_deleteNoteBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel createdDate;
+    private javax.swing.JLabel createdDateLabel;
     private javax.swing.JPanel createdDatePanel;
-    private javax.swing.JLabel createdLabel;
-    private javax.swing.JLabel createdLabel1;
-    private javax.swing.JLabel creationDate;
-    private javax.swing.JLabel creationDate1;
     private customSwingComponents.GradientButton deleteNoteBtn;
     private customSwingComponents.GradientButton editBtn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JLabel lastEdited;
     private javax.swing.JPanel lastEditedDatePanel;
+    private javax.swing.JLabel lastEditedLabel;
     private javax.swing.JTextArea noteContent;
     private javax.swing.JLabel noteTitle;
     private customSwingComponents.PanelBorder panelBorder1;

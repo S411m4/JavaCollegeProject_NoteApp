@@ -45,7 +45,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="roundedButton1" min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="addNoteBtn" min="-2" pref="41" max="-2" attributes="0"/>
                   <EmptySpace pref="562" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -54,14 +54,14 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="roundedButton1" min="-2" pref="40" max="-2" attributes="0"/>
+                  <Component id="addNoteBtn" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="com.markbean.notes.customGUIComponents.RoundedButton" name="roundedButton1">
+        <Component class="com.markbean.notes.customGUIComponents.RoundedButton" name="addNoteBtn">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="a4" green="50" red="67" type="rgb"/>
@@ -90,7 +90,7 @@
             <Property name="radius" type="int" value="15"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="roundedButton1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addNoteBtnActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

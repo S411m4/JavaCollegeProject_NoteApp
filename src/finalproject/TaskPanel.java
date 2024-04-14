@@ -4,6 +4,10 @@
  */
 package finalproject;
 
+import DatabaseHelpers.DatabaseHelper;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import models.NoteModel;
 import models.TaskModel;
 
 /**
@@ -13,18 +17,39 @@ import models.TaskModel;
 public class TaskPanel extends javax.swing.JPanel {
 
     private TaskModel task;
+
     /**
      * Creates new form taskPanel
      */
     public TaskPanel(TaskModel task) {
         this.task = task;
         initComponents();
+        if (this.task.getState()) {
+            taskDone.doClick();
+        }
+
+        taskString.setText(this.task.getTask());
+        taskString.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                task.setTask(taskString.getText());
+                task.Save();
+            }
+        });
     }
-    
-    public TaskPanel()
-    {
+
+    public TaskPanel() {
         initComponents();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,6 +78,11 @@ public class TaskPanel extends javax.swing.JPanel {
         taskString.setForeground(new java.awt.Color(255, 255, 255));
         taskString.setText("Task");
         taskString.setBorder(null);
+        taskString.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                taskStringActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -78,9 +108,14 @@ public class TaskPanel extends javax.swing.JPanel {
 
     private void taskDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taskDoneActionPerformed
         // TODO add your handling code here:
-        task.SetTaskDone(taskDone.isSelected());
-        System.out.println("task status: " + task.checked);
+        task.setChecked(taskDone.isSelected());
+        task.Save();
     }//GEN-LAST:event_taskDoneActionPerformed
+
+    private void taskStringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taskStringActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_taskStringActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

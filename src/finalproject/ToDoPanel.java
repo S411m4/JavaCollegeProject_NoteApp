@@ -4,7 +4,9 @@
  */
 package finalproject;
 
+import DatabaseHelpers.DatabaseHelper;
 import customSwingComponents.ScrollBar;
+import models.NoteModel;
 import models.TaskModel;
 import net.miginfocom.swing.MigLayout;
 
@@ -17,6 +19,7 @@ public class ToDoPanel extends javax.swing.JPanel {
     /**
      * Creates new form ToDoPanel
      */
+        
     public ToDoPanel() {
         initComponents();
         tasksScrollPanel.setVerticalScrollBar(new ScrollBar());
@@ -24,7 +27,7 @@ public class ToDoPanel extends javax.swing.JPanel {
         tasksScrollPanel.getViewport().setOpaque(false);
         tasksScrollPanel.setViewportBorder(null);
         tasksList.setLayout(new MigLayout("inset 0, fillx, wrap", "[fill]"));
-
+        LoadTasks();
     }
 
     /**
@@ -155,8 +158,18 @@ public class ToDoPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
     private void clearFinishedTasksBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearFinishedTasksBtnActionPerformed
         // TODO add your handling code here:
+        for(TaskModel task : DatabaseHelper.tasks)
+        {
+            if(task.getState() == true){
+                task.Delete();
+            }
+        }
+                LoadTasks();
+
     }//GEN-LAST:event_clearFinishedTasksBtnActionPerformed
 
     private void AddTaskBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddTaskBtn1ActionPerformed
@@ -164,6 +177,17 @@ public class ToDoPanel extends javax.swing.JPanel {
          revalidate(); //to repaint the panel after adding new task
     }//GEN-LAST:event_AddTaskBtn1ActionPerformed
 
+    public void LoadTasks(){
+    
+        tasksList.removeAll();
+        for(TaskModel task : DatabaseHelper.tasks)
+        {
+            tasksList.add(new TaskPanel(task));
+        }
+        revalidate();
+        repaint();
+    
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.markbean.notes.customGUIComponents.RoundedButton AddTaskBtn1;
