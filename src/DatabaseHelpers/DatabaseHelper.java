@@ -21,10 +21,10 @@ public class DatabaseHelper {
     public static ArrayList<NoteModel> notes = new ArrayList<NoteModel>(); 
     public static ArrayList<TaskModel> tasks = new ArrayList<TaskModel>(); 
     
-    //TODO: MAKE LOCATION DYNAMMIC 3SHAN YSTH5L 3ND EL NAS
     //public static final String URL = "jdbc:sqlite:G:/college/year_1/Term_2/Java/CollegeProjectCode/SQLTest/DB/mydatabase.db";
     
-        public static final String URL = "jdbc:sqlite:" + DatabaseHelper.class.getProtectionDomain().getCodeSource().getLocation().getPath()  +  "notesDatatbase.db";
+    public DatabaseHelper(){}
+        public static final String URL = "jdbc:sqlite:" + DatabaseHelper.class.getProtectionDomain().getCodeSource().getLocation().getPath()  +  "userDatabase.db";
         
       public static ArrayList<NoteModel> getAllNotes() {
         ArrayList<NoteModel> notes = new ArrayList<NoteModel>();

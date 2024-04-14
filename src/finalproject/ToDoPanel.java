@@ -6,7 +6,6 @@ package finalproject;
 
 import DatabaseHelpers.DatabaseHelper;
 import customSwingComponents.ScrollBar;
-import models.NoteModel;
 import models.TaskModel;
 import net.miginfocom.swing.MigLayout;
 

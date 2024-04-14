@@ -60,7 +60,7 @@ public class TaskPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         taskDone = new javax.swing.JCheckBox();
-        taskString = new javax.swing.JTextField();
+        taskString = new customSwingComponents.StrikeThroughTextField();
 
         setOpaque(false);
 
@@ -74,52 +74,51 @@ public class TaskPanel extends javax.swing.JPanel {
         });
 
         taskString.setBackground(new java.awt.Color(20, 18, 24));
-        taskString.setFont(new java.awt.Font("Segoe Print", 0, 14)); // NOI18N
-        taskString.setForeground(new java.awt.Color(255, 255, 255));
-        taskString.setText("Task");
         taskString.setBorder(null);
-        taskString.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                taskStringActionPerformed(evt);
-            }
-        });
+        taskString.setForeground(new java.awt.Color(255, 255, 255));
+        taskString.setText("Task...");
+        taskString.setFont(new java.awt.Font("Segoe Print", 0, 14)); // NOI18N
+        taskString.setLineColor(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(taskString, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(taskString, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(taskDone)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addGap(68, 68, 68))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(taskString)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(taskString, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(taskDone))
-                .addContainerGap())
+                .addGap(10, 10, 10))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void taskDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taskDoneActionPerformed
         // TODO add your handling code here:
         task.setChecked(taskDone.isSelected());
+        if(taskDone.isSelected())
+        {
+            taskString.drawStrikeThroughLine();
+        }
+        else
+        {
+            taskString.unDrawStrikeThroughLine();
+        }
         task.Save();
     }//GEN-LAST:event_taskDoneActionPerformed
-
-    private void taskStringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taskStringActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_taskStringActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox taskDone;
-    private javax.swing.JTextField taskString;
+    private customSwingComponents.StrikeThroughTextField taskString;
     // End of variables declaration//GEN-END:variables
 }

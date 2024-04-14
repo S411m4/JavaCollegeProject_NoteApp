@@ -32,7 +32,6 @@ public class UserPanel extends javax.swing.JPanel {
         tag2 = new customSwingComponents.Tag();
         tag3 = new customSwingComponents.Tag();
         userInfo = new javax.swing.JPanel();
-        switchToggle1 = new customSwingComponents.SwitchToggle();
         userName = new javax.swing.JTextField();
         userImage = new customSwingComponents.PanelBorder();
 
@@ -70,8 +69,6 @@ public class UserPanel extends javax.swing.JPanel {
 
         userInfo.setOpaque(false);
 
-        switchToggle1.setBackground(new java.awt.Color(103, 80, 164));
-
         userName.setBackground(new java.awt.Color(20, 18, 24));
         userName.setFont(new java.awt.Font("Segoe Print", 1, 24)); // NOI18N
         userName.setForeground(new java.awt.Color(230, 224, 233));
@@ -107,16 +104,10 @@ public class UserPanel extends javax.swing.JPanel {
                 .addComponent(userImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(userName, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(switchToggle1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
         userInfoLayout.setVerticalGroup(
             userInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userInfoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(switchToggle1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userInfoLayout.createSequentialGroup()
                 .addContainerGap(8, Short.MAX_VALUE)
                 .addGroup(userInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,7 +156,6 @@ public class UserPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private customSwingComponents.PanelBorder panelBorder3;
-    private customSwingComponents.SwitchToggle switchToggle1;
     private customSwingComponents.Tag tag1;
     private customSwingComponents.Tag tag2;
     private customSwingComponents.Tag tag3;
