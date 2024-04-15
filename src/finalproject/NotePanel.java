@@ -320,6 +320,7 @@ public class NotePanel extends javax.swing.JPanel {
 
     private void paintBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paintBtnActionPerformed
         // TODO add your handling code here:
+        new Paintapp();
     }//GEN-LAST:event_paintBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
