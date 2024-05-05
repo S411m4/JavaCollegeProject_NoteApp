@@ -8,8 +8,6 @@ import DatabaseHelpers.DatabaseHelper;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  *

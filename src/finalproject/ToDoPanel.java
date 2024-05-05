@@ -15,6 +15,7 @@ import net.miginfocom.swing.MigLayout;
  */
 public class ToDoPanel extends javax.swing.JPanel {
 
+
     /**
      * Creates new form ToDoPanel
      */
@@ -26,7 +27,6 @@ public class ToDoPanel extends javax.swing.JPanel {
         tasksScrollPanel.getViewport().setOpaque(false);
         tasksScrollPanel.setViewportBorder(null);
         tasksList.setLayout(new MigLayout("inset 0, fillx, wrap", "[fill]"));
-        LoadTasks();
     }
 
     /**
@@ -161,13 +161,15 @@ public class ToDoPanel extends javax.swing.JPanel {
     
     private void clearFinishedTasksBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearFinishedTasksBtnActionPerformed
         // TODO add your handling code here:
-        for(TaskModel task : DatabaseHelper.tasks)
+        for(int i = 0; i < DatabaseHelper.tasks.size(); i++)
         {
-            if(task.getState() == true){
-                task.Delete();
+            if(DatabaseHelper.tasks.get(i).getState() == true)
+            {
+                DatabaseHelper.tasks.get(i).Delete();
             }
         }
-                LoadTasks();
+        
+                    LoadTasks();
 
     }//GEN-LAST:event_clearFinishedTasksBtnActionPerformed
 
@@ -187,6 +189,9 @@ public class ToDoPanel extends javax.swing.JPanel {
         repaint();
     
     }
+    
+ 
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.markbean.notes.customGUIComponents.RoundedButton AddTaskBtn1;
