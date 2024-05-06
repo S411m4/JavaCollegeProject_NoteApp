@@ -22,7 +22,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import models.NoteModel;
 import models.TaskModel;
-
 /**
  *
  * @author salma
@@ -151,7 +150,9 @@ public class TaskPanel extends javax.swing.JPanel {
 
     private void setDueDateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setDueDateBtnActionPerformed
         // TODO add your handling code here:
-        new time();
+        //new time();        
+        
+        
     }//GEN-LAST:event_setDueDateBtnActionPerformed
 
     
@@ -170,9 +171,10 @@ class time extends JFrame implements ActionListener
     
     
     public time() {
+                setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
         setTitle("set the Duo Date");
         setSize(400, 200);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         currentCalendar = Calendar.getInstance();
         ok = new JButton("OK");
@@ -216,6 +218,7 @@ class time extends JFrame implements ActionListener
             public void actionPerformed(ActionEvent e) {
                 currentCalendar.add(Calendar.MONTH, -1);
                 updateCalendar();
+                                
             }
         });
 
@@ -241,12 +244,10 @@ class time extends JFrame implements ActionListener
         int year = Integer.parseInt(yearComboBox.getSelectedItem().toString());
         currentCalendar.set(Calendar.YEAR, year);
         monthLabel.setText(sdf.format(currentCalendar.getTime()));   
-       
-    }
+}
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
     
