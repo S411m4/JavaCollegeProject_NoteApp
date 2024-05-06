@@ -17,6 +17,9 @@ public class PanelDate extends javax.swing.JLayeredPane {
         this.month = month;
         this.year = year;
         init();
+        
+        revalidate();
+        repaint();
     }
     
     public void setMonthYear(int month, int year)
@@ -28,8 +31,11 @@ public class PanelDate extends javax.swing.JLayeredPane {
     
     public String getSelectedDate()
     {
-        return selectedCell.getDay() + ":" + selectedCell.getMonth() + ":" + selectedCell.getYear();
+        
+        return selectedCell.getDay() + "-" + selectedCell.getMonth() + "-" + selectedCell.getYear();
+        
     }
+    
     
     private void init() {
         mon.asTitle();
@@ -51,6 +57,12 @@ public class PanelDate extends javax.swing.JLayeredPane {
     int startDay = calendar.get(Calendar.DAY_OF_WEEK) - 1;
     int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 
+     // Get today's date for comparison
+        Calendar today = Calendar.getInstance();
+        int todayDate = today.get(Calendar.DATE);
+        int todayMonth = today.get(Calendar.MONTH) + 1; // +1 because Calendar.MONTH is zero-based
+        int todayYear = today.get(Calendar.YEAR);
+
     // Start from the first day of the week for the current month
     calendar.add(Calendar.DATE, -startDay);
 
@@ -64,8 +76,19 @@ public class PanelDate extends javax.swing.JLayeredPane {
                 // Check if the day is within the current month
                 if (displayMonth == this.month) {
                     cell.setText(Integer.toString(displayDay));
+                    if (displayDay == todayDate && displayMonth == todayMonth && year == todayYear) {
+                        cell.setSelected(true);
+                        cell.setDay(Integer.toString(displayDay));
+                        cell.setMonth(Integer.toString(displayMonth));
+                        cell.setYear(Integer.toString(year)); 
+                        selectedCell = cell; // Store this cell as selected
+
+                    } else {
+                        cell.setSelected(false);
+                    }
                 } else {
                     cell.setText(""); // Or make the cell invisible or disabled
+                    cell.setSelected(false);
                 }
 
                 cell.addActionListener(new ActionListener() {
@@ -74,14 +97,16 @@ public class PanelDate extends javax.swing.JLayeredPane {
                         if (selectedCell != null) {
                             selectedCell.setSelected(false);
                         }
-                        selectedCell = cell;
                         cell.setSelected(true);
                         cell.setDay(Integer.toString(displayDay));
                         cell.setMonth(Integer.toString(displayMonth));
-                        cell.setYear(Integer.toString(year));
+                        cell.setYear(Integer.toString(year)); 
+                        selectedCell = cell;
+                        
+                        
+
                     }
                 });
-
                 calendar.add(Calendar.DATE, 1);
             }
         }
@@ -89,11 +114,11 @@ public class PanelDate extends javax.swing.JLayeredPane {
 }
 
     
-    private ToDay getToDay() {
+private ToDay getToDay() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
         return new ToDay(calendar.get(Calendar.DATE), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR));
-    }
+}
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

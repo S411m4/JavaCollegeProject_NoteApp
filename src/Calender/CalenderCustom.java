@@ -7,6 +7,7 @@ import customSwingComponents.PanelSlide;
 import com.raven.swing.TimePicker;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JDialog;
 
 
@@ -14,26 +15,32 @@ public class CalenderCustom extends javax.swing.JPanel {
 
     private int month;
     private int year;
-    private PanelDate panelDate = new PanelDate(4, 2024);
+    private PanelDate panelDate = new PanelDate(2, 2024);
     private TimePicker timePicker = new TimePicker();
     private JDialog parentDialog;
+    private String dueDateTimeString = null;
+    private JButton DueDateBtn;
     
-    public CalenderCustom(JDialog parentDialog) {
+    public CalenderCustom(JDialog parentDialog, JButton DueDateBtn) {
         this.parentDialog = parentDialog;
+        this.DueDateBtn = DueDateBtn;
+        this.DueDateBtn.setToolTipText("no due date");
         initComponents();
         setTitleDate();
-        slide.show(panelDate, PanelSlide.AnimateType.TO_RIGHT);
+         panelDate = new PanelDate(month, year);
+         slide.show(panelDate, PanelSlide.AnimateType.TO_RIGHT);
         showMonthYear();
         panelDate.setMonthYear(month, year);
+   
          timePicker.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Time Selected " + timePicker.getSelectedTime());
+                //System.out.println("Time Selected " + timePicker.getSelectedTime());
+                dueDateTimeString += timePicker.getSelectedTime();
+                DueDateBtn.setToolTipText(dueDateTimeString);
             }
-            
         });
          
-         repaint();
     }
 
     @SuppressWarnings("unchecked")
@@ -46,7 +53,6 @@ public class CalenderCustom extends javax.swing.JPanel {
         lbMonthYear = new javax.swing.JLabel();
         slide = new customSwingComponents.PanelSlide();
         okBtn = new com.markbean.notes.customGUIComponents.RoundedButton();
-        selectedDateLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -113,8 +119,6 @@ public class CalenderCustom extends javax.swing.JPanel {
             }
         });
 
-        selectedDateLabel.setText("jLabel1");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -126,12 +130,10 @@ public class CalenderCustom extends javax.swing.JPanel {
                         .addGap(6, 6, 6)
                         .addComponent(slide, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(selectedDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(okBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addComponent(okBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -140,10 +142,8 @@ public class CalenderCustom extends javax.swing.JPanel {
                 .addComponent(layeredPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(slide, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(okBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(selectedDateLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(okBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -175,8 +175,10 @@ public class CalenderCustom extends javax.swing.JPanel {
     }//GEN-LAST:event_cmdBackActionPerformed
 
     private void okBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okBtnActionPerformed
-        // TODO add your handling code here:
-        System.out.println("selected date: " + panelDate.getSelectedDate());
+        
+        dueDateTimeString = panelDate.getSelectedDate() + ", ";
+//        System.out.println("selected date: " + panelDate.getSelectedDate());
+        
         timePicker.showPopup(null, 10, 10);
         if(parentDialog != null)
         {
@@ -208,7 +210,6 @@ public class CalenderCustom extends javax.swing.JPanel {
     private javax.swing.JLayeredPane layeredPane;
     private javax.swing.JLabel lbMonthYear;
     private com.markbean.notes.customGUIComponents.RoundedButton okBtn;
-    private javax.swing.JLabel selectedDateLabel;
     private customSwingComponents.PanelSlide slide;
     // End of variables declaration//GEN-END:variables
 }

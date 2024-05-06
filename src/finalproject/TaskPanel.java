@@ -31,7 +31,7 @@ import main.CalenderCustom;
  * @author salma
  */
 public class TaskPanel extends javax.swing.JPanel {
-    private   String str1;
+    private String str1;
     JLabel index , date;
     private TaskModel task;
 
@@ -104,7 +104,7 @@ public class TaskPanel extends javax.swing.JPanel {
         setDueDateBtn.setBackground(new java.awt.Color(20, 18, 24));
         setDueDateBtn.setBorder(null);
         setDueDateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/calenderIcon.png"))); // NOI18N
-        setDueDateBtn.setToolTipText("set due date");
+        setDueDateBtn.setToolTipText("");
         setDueDateBtn.setBorderColor(new java.awt.Color(20, 18, 24));
         setDueDateBtn.setBorderPainted(false);
         setDueDateBtn.setColor(new java.awt.Color(20, 18, 24));
@@ -167,7 +167,7 @@ public class TaskPanel extends javax.swing.JPanel {
         JDialog dialog = new JDialog();
         dialog.setSize(600,500);
         dialog.setLocationRelativeTo(this);
-        CalenderCustom calender = new CalenderCustom(dialog);
+        CalenderCustom calender = new CalenderCustom(dialog, setDueDateBtn);
         dialog.add(calender);
         dialog.setVisible(true);
         repaint();
