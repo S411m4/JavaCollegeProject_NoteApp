@@ -4,17 +4,52 @@
  */
 package finalproject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  *
  * @author salma
  */
 public class DateTimePanel extends javax.swing.JPanel {
 
+    private int month;
+    private int year;
+    
     /**
      * Creates new form DateTimePanel
      */
     public DateTimePanel() {
         initComponents();
+        setDateTime();
+        
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(60000);
+                    } catch (InterruptedException e) {
+                        System.err.println(e);
+                    }
+                    setDateTime();
+                }
+            }
+        }).start();
+        
+    }
+    
+    private void setDateTime()
+    {
+        
+        Date date = new Date();
+        SimpleDateFormat tf = new SimpleDateFormat("hh mm aa");
+        SimpleDateFormat df = new SimpleDateFormat("EEEE, MMMM dd");
+        String time = tf.format(date);
+        hoursText.setText(time.split(" ")[0]);
+        minutesText.setText(time.split(" ")[1]);
+        daytimeText.setText(time.split(" ")[2]);
+        dateText.setText(df.format(date));
     }
 
     /**
@@ -27,24 +62,25 @@ public class DateTimePanel extends javax.swing.JPanel {
     private void initComponents() {
 
         panelBorder1 = new customSwingComponents.PanelBorder();
-        dateText = new javax.swing.JLabel();
+        dateTimeLabel = new javax.swing.JLabel();
         clockPanel = new javax.swing.JPanel();
         panelBorder4 = new customSwingComponents.PanelBorder();
         minutesText = new javax.swing.JLabel();
         panelBorder5 = new customSwingComponents.PanelBorder();
         hoursText = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        dateText2 = new javax.swing.JLabel();
+        daytimeText = new javax.swing.JLabel();
+        dateText = new javax.swing.JLabel();
 
         setOpaque(false);
 
         panelBorder1.setBackground(new java.awt.Color(20, 18, 24));
         panelBorder1.setRadius(50);
 
-        dateText.setBackground(new java.awt.Color(254, 247, 255));
-        dateText.setFont(new java.awt.Font("Segoe Print", 0, 12)); // NOI18N
-        dateText.setForeground(new java.awt.Color(202, 196, 208));
-        dateText.setText("date & time");
+        dateTimeLabel.setBackground(new java.awt.Color(254, 247, 255));
+        dateTimeLabel.setFont(new java.awt.Font("Segoe Print", 0, 12)); // NOI18N
+        dateTimeLabel.setForeground(new java.awt.Color(202, 196, 208));
+        dateTimeLabel.setText("date & time");
 
         clockPanel.setOpaque(false);
 
@@ -114,6 +150,12 @@ public class DateTimePanel extends javax.swing.JPanel {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText(":");
 
+        daytimeText.setBackground(new java.awt.Color(254, 247, 255));
+        daytimeText.setFont(new java.awt.Font("Segoe Print", 1, 36)); // NOI18N
+        daytimeText.setForeground(new java.awt.Color(254, 247, 255));
+        daytimeText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        daytimeText.setText("P.m.");
+
         javax.swing.GroupLayout clockPanelLayout = new javax.swing.GroupLayout(clockPanel);
         clockPanel.setLayout(clockPanelLayout);
         clockPanelLayout.setHorizontalGroup(
@@ -125,25 +167,28 @@ public class DateTimePanel extends javax.swing.JPanel {
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelBorder4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(daytimeText, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
                 .addContainerGap())
         );
         clockPanelLayout.setVerticalGroup(
             clockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(clockPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(clockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(clockPanelLayout.createSequentialGroup()
+                .addGroup(clockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(daytimeText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, clockPanelLayout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addComponent(jLabel4))
-                    .addComponent(panelBorder5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelBorder4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelBorder5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelBorder4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(15, 15, 15))
         );
 
-        dateText2.setBackground(new java.awt.Color(254, 247, 255));
-        dateText2.setFont(new java.awt.Font("Segoe Print", 1, 36)); // NOI18N
-        dateText2.setForeground(new java.awt.Color(254, 247, 255));
-        dateText2.setText("Mon, Aug 17");
+        dateText.setBackground(new java.awt.Color(254, 247, 255));
+        dateText.setFont(new java.awt.Font("Segoe Print", 1, 36)); // NOI18N
+        dateText.setForeground(new java.awt.Color(254, 247, 255));
+        dateText.setText("Mon, Aug 17");
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -152,18 +197,18 @@ public class DateTimePanel extends javax.swing.JPanel {
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(clockPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateTimeLabel)
                     .addComponent(dateText)
-                    .addComponent(dateText2))
-                .addGap(0, 152, Short.MAX_VALUE))
+                    .addComponent(clockPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap(15, Short.MAX_VALUE)
-                .addComponent(dateText)
+                .addComponent(dateTimeLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dateText2)
+                .addComponent(dateText)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(clockPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -174,7 +219,7 @@ public class DateTimePanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 390, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,7 +231,8 @@ public class DateTimePanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel clockPanel;
     private javax.swing.JLabel dateText;
-    private javax.swing.JLabel dateText2;
+    private javax.swing.JLabel dateTimeLabel;
+    private javax.swing.JLabel daytimeText;
     private javax.swing.JLabel hoursText;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel minutesText;

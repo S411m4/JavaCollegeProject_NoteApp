@@ -26,7 +26,7 @@ public class PanelTags extends javax.swing.JPanel {
     private void init() {
         setBackground(Color.WHITE);
         setLayout(new WrapLayout(WrapLayout.LEFT));
-        Item input = new Item("default");
+        Item input = new Item("");
         input.addEventKey(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent ke) {

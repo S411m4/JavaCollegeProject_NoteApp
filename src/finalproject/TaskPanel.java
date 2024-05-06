@@ -22,6 +22,9 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import models.NoteModel;
 import models.TaskModel;
+import com.raven.swing.TimePicker;
+import java.awt.Component;
+
 /**
  *
  * @author salma
@@ -30,6 +33,7 @@ public class TaskPanel extends javax.swing.JPanel {
     private   String str1;
     JLabel index , date;
     private TaskModel task;
+    private TimePicker timePicker = new TimePicker();
 
     /**
      * Creates new form taskPanel
@@ -62,6 +66,14 @@ public class TaskPanel extends javax.swing.JPanel {
 
     public TaskPanel() {
         initComponents();
+        
+         timePicker.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Time Selected " + timePicker.getSelectedTime());
+            }
+            
+        });
     }
 
     /**
@@ -150,7 +162,7 @@ public class TaskPanel extends javax.swing.JPanel {
 
     private void setDueDateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setDueDateBtnActionPerformed
         // TODO add your handling code here:
-        //new time();        
+        new time(this);        
         
         
     }//GEN-LAST:event_setDueDateBtnActionPerformed
@@ -170,7 +182,7 @@ class time extends JFrame implements ActionListener
     private DefaultTableModel calendarTableModel;
     
     
-    public time() {
+    public time(Component parent) {
                 setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         setTitle("set the Duo Date");
@@ -217,8 +229,7 @@ class time extends JFrame implements ActionListener
             @Override
             public void actionPerformed(ActionEvent e) {
                 currentCalendar.add(Calendar.MONTH, -1);
-                updateCalendar();
-                                
+                updateCalendar();             
             }
         });
 
@@ -234,6 +245,7 @@ class time extends JFrame implements ActionListener
             public void actionPerformed(ActionEvent e)
             {
                   str1 = String.valueOf(monthLabel.getText());
+                    timePicker.showPopup(null, 10, 10);
                  dispose();
             }
         });
@@ -248,6 +260,8 @@ class time extends JFrame implements ActionListener
 
         @Override
         public void actionPerformed(ActionEvent e) {
+           
+
         }
 
     
