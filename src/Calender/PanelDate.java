@@ -1,6 +1,8 @@
 package main;
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -8,12 +10,25 @@ public class PanelDate extends javax.swing.JLayeredPane {
     
     private int month;
     private int year;
+    private Cell selectedCell = null;
     
     public PanelDate(int month, int year) {
         initComponents();
         this.month = month;
         this.year = year;
         init();
+    }
+    
+    public void setMonthYear(int month, int year)
+    {
+        this.month = month;
+        this.year = year;
+        
+    }
+    
+    public String getSelectedDate()
+    {
+        return selectedCell.getDay() + ":" + selectedCell.getMonth() + ":" + selectedCell.getYear();
     }
     
     private void init() {
@@ -27,27 +42,52 @@ public class PanelDate extends javax.swing.JLayeredPane {
         setDate();
     }
     
-    private void setDate() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month-1);
-        calendar.set(Calendar.DATE, 1);
-        int startDay = calendar.get(Calendar.DAY_OF_WEEK) -1;
-        calendar.add(Calendar.DATE, -startDay);
-        ToDay toDay = getToDay();
-        for(Component com: getComponents()) {
-            Cell cell = (Cell)com;
-            if(!cell.isTitle()) {
-                cell.setText(calendar.get(Calendar.DATE) + "");
-                cell.setDate(calendar.getTime());
-                cell.currentMonth(calendar.get(Calendar.MONTH) == month - 1);
-                if (toDay.isToDay(new ToDay(calendar.get(Calendar.DATE), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR)))) {
-                    cell.setAsToDay();
+   public void setDate() {
+    Calendar calendar = Calendar.getInstance();
+    calendar.set(Calendar.YEAR, year);
+    calendar.set(Calendar.MONTH, month - 1);
+    calendar.set(Calendar.DATE, 1);
+
+    int startDay = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+    int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+    // Start from the first day of the week for the current month
+    calendar.add(Calendar.DATE, -startDay);
+
+    for (Component com : getComponents()) {
+        if (com instanceof Cell) {
+            Cell cell = (Cell) com;
+            if (!cell.isTitle()) {
+                int displayDay = calendar.get(Calendar.DATE);
+                int displayMonth = calendar.get(Calendar.MONTH) + 1;
+
+                // Check if the day is within the current month
+                if (displayMonth == this.month) {
+                    cell.setText(Integer.toString(displayDay));
+                } else {
+                    cell.setText(""); // Or make the cell invisible or disabled
                 }
+
+                cell.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (selectedCell != null) {
+                            selectedCell.setSelected(false);
+                        }
+                        selectedCell = cell;
+                        cell.setSelected(true);
+                        cell.setDay(Integer.toString(displayDay));
+                        cell.setMonth(Integer.toString(displayMonth));
+                        cell.setYear(Integer.toString(year));
+                    }
+                });
+
                 calendar.add(Calendar.DATE, 1);
             }
         }
     }
+}
+
     
     private ToDay getToDay() {
         Calendar calendar = Calendar.getInstance();
@@ -141,6 +181,11 @@ public class PanelDate extends javax.swing.JLayeredPane {
         add(sat);
 
         cell8.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        cell8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cell8ActionPerformed(evt);
+            }
+        });
         add(cell8);
 
         cell9.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
@@ -266,6 +311,10 @@ public class PanelDate extends javax.swing.JLayeredPane {
         cell49.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         add(cell49);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cell8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cell8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cell8ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

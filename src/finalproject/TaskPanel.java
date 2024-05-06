@@ -22,8 +22,9 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import models.NoteModel;
 import models.TaskModel;
-import com.raven.swing.TimePicker;
 import java.awt.Component;
+import javax.swing.JDialog;
+import main.CalenderCustom;
 
 /**
  *
@@ -33,7 +34,6 @@ public class TaskPanel extends javax.swing.JPanel {
     private   String str1;
     JLabel index , date;
     private TaskModel task;
-    private TimePicker timePicker = new TimePicker();
 
     /**
      * Creates new form taskPanel
@@ -67,13 +67,7 @@ public class TaskPanel extends javax.swing.JPanel {
     public TaskPanel() {
         initComponents();
         
-         timePicker.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Time Selected " + timePicker.getSelectedTime());
-            }
-            
-        });
+        
     }
 
     /**
@@ -162,110 +156,120 @@ public class TaskPanel extends javax.swing.JPanel {
 
     private void setDueDateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setDueDateBtnActionPerformed
         // TODO add your handling code here:
-        new time(this);        
+        //new time(this);  
+        openCalenderPopup();
         
         
     }//GEN-LAST:event_setDueDateBtnActionPerformed
 
+    private void openCalenderPopup()
+    {
+        JDialog dialog = new JDialog();
+        dialog.setSize(600,500);
+        dialog.setLocationRelativeTo(this);
+        CalenderCustom calender = new CalenderCustom(dialog);
+        dialog.add(calender);
+        dialog.setVisible(true);
+        repaint();
+    }
     
 //Roaa-Rowan time calender due date for task
-class time extends JFrame implements ActionListener
-{
-   private JLabel monthLabel;
-    private JButton prevButton, nextButton , ok;
-    private JTable calendarTable;
-    private JComboBox<String> yearComboBox;
-    private JScrollPane calendarScrollPane;
-    private JPanel calendarPanel;
-    private SimpleDateFormat sdf = new SimpleDateFormat("MMMM yyyy");
-    private Calendar currentCalendar;
-    private DefaultTableModel calendarTableModel;
-    
-    
-    public time(Component parent) {
-                setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-        setTitle("set the Duo Date");
-        setSize(400, 200);
-        setVisible(true);
-        currentCalendar = Calendar.getInstance();
-        ok = new JButton("OK");
-        monthLabel = new JLabel("", JLabel.CENTER);
-        prevButton = new JButton("<");
-        nextButton = new JButton(">");
-        calendarTableModel = new DefaultTableModel() {
-            public boolean isCellEditable(int rowIndex, int mColIndex) {
-                return false;
-            }
-        };
-        calendarTable = new JTable(calendarTableModel);
-        calendarScrollPane = new JScrollPane(calendarTable);
-        calendarPanel = new JPanel(null);
-
-        calendarPanel.setBorder(BorderFactory.createTitledBorder("Calendar"));
-        
-        getContentPane().setLayout(null);
-        monthLabel.setBounds(145, 20, 100, 20);
-        prevButton.setBounds(3, 40, 50, 50);
-        nextButton.setBounds(330, 40, 50, 50);
-        ok.setBounds(160, 40, 70, 50);
-        getContentPane().add(monthLabel);
-        getContentPane().add(prevButton);
-        getContentPane().add(nextButton);        
-        getContentPane().add(ok);
-
-        String[] years = {"2024","2025","2026"};
-        yearComboBox = new JComboBox<>(years);
-        yearComboBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updateCalendar();
-            }
-        });
-        yearComboBox.setBounds(80,100,200,20);
-        getContentPane().add(yearComboBox);
-
-        prevButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                currentCalendar.add(Calendar.MONTH, -1);
-                updateCalendar();             
-            }
-        });
-
-        nextButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                currentCalendar.add(Calendar.MONTH, 1);
-                updateCalendar();
-            }
-        });
-        ok.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                  str1 = String.valueOf(monthLabel.getText());
-                    timePicker.showPopup(null, 10, 10);
-                 dispose();
-            }
-        });
-        updateCalendar();
-        
-    }
-    private void updateCalendar() {
-        int year = Integer.parseInt(yearComboBox.getSelectedItem().toString());
-        currentCalendar.set(Calendar.YEAR, year);
-        monthLabel.setText(sdf.format(currentCalendar.getTime()));   
-}
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-           
-
-        }
-
-    
- }
+//class time extends JFrame implements ActionListener
+//{
+//   private JLabel monthLabel;
+//    private JButton prevButton, nextButton , ok;
+//    private JTable calendarTable;
+//    private JComboBox<String> yearComboBox;
+//    private JScrollPane calendarScrollPane;
+//    private JPanel calendarPanel;
+//    private SimpleDateFormat sdf = new SimpleDateFormat("MMMM yyyy");
+//    private Calendar currentCalendar;
+//    private DefaultTableModel calendarTableModel;
+//    
+//    
+//    public time(Component parent) {
+//                setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//
+//        setTitle("set the Duo Date");
+//        setSize(400, 200);
+//        setVisible(true);
+//        currentCalendar = Calendar.getInstance();
+//        ok = new JButton("OK");
+//        monthLabel = new JLabel("", JLabel.CENTER);
+//        prevButton = new JButton("<");
+//        nextButton = new JButton(">");
+//        calendarTableModel = new DefaultTableModel() {
+//            public boolean isCellEditable(int rowIndex, int mColIndex) {
+//                return false;
+//            }
+//        };
+//        calendarTable = new JTable(calendarTableModel);
+//        calendarScrollPane = new JScrollPane(calendarTable);
+//        calendarPanel = new JPanel(null);
+//
+//        calendarPanel.setBorder(BorderFactory.createTitledBorder("Calendar"));
+//        
+//        getContentPane().setLayout(null);
+//        monthLabel.setBounds(145, 20, 100, 20);
+//        prevButton.setBounds(3, 40, 50, 50);
+//        nextButton.setBounds(330, 40, 50, 50);
+//        ok.setBounds(160, 40, 70, 50);
+//        getContentPane().add(monthLabel);
+//        getContentPane().add(prevButton);
+//        getContentPane().add(nextButton);        
+//        getContentPane().add(ok);
+//
+//        String[] years = {"2024","2025","2026"};
+//        yearComboBox = new JComboBox<>(years);
+//        yearComboBox.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                updateCalendar();
+//            }
+//        });
+//        yearComboBox.setBounds(80,100,200,20);
+//        getContentPane().add(yearComboBox);
+//
+//        prevButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                currentCalendar.add(Calendar.MONTH, -1);
+//                updateCalendar();             
+//            }
+//        });
+//
+//        nextButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                currentCalendar.add(Calendar.MONTH, 1);
+//                updateCalendar();
+//            }
+//        });
+//        ok.addActionListener(new ActionListener()
+//        {
+//            public void actionPerformed(ActionEvent e)
+//            {
+//                  str1 = String.valueOf(monthLabel.getText());
+//                    dispose();
+//            }
+//        });
+//        updateCalendar();
+//        
+//    }
+//    private void updateCalendar() {
+//        int year = Integer.parseInt(yearComboBox.getSelectedItem().toString());
+//        currentCalendar.set(Calendar.YEAR, year);
+//        monthLabel.setText(sdf.format(currentCalendar.getTime()));   
+//}
+//
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//           
+//
+//        }
+//
+//    
+// }
 
       
     // Variables declaration - do not modify//GEN-BEGIN:variables
