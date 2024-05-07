@@ -104,7 +104,7 @@ public class TaskPanel extends javax.swing.JPanel {
         setDueDateBtn.setBackground(new java.awt.Color(20, 18, 24));
         setDueDateBtn.setBorder(null);
         setDueDateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/calenderIcon.png"))); // NOI18N
-        setDueDateBtn.setToolTipText("");
+        setDueDateBtn.setToolTipText("no due date");
         setDueDateBtn.setBorderColor(new java.awt.Color(20, 18, 24));
         setDueDateBtn.setBorderPainted(false);
         setDueDateBtn.setColor(new java.awt.Color(20, 18, 24));

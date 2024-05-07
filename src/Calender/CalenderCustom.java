@@ -24,7 +24,6 @@ public class CalenderCustom extends javax.swing.JPanel {
     public CalenderCustom(JDialog parentDialog, JButton DueDateBtn) {
         this.parentDialog = parentDialog;
         this.DueDateBtn = DueDateBtn;
-        this.DueDateBtn.setToolTipText("no due date");
         initComponents();
         setTitleDate();
          panelDate = new PanelDate(month, year);

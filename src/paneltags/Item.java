@@ -53,7 +53,6 @@ public class Item extends javax.swing.JLayeredPane {
     public Item(String text) {
         initComponents();                   
         color = generateRandomColor();
-        txt.setBackground(new Color(0,0,0));
         txt.setText(text);
         txt.setFocusable(false);
 
@@ -98,6 +97,7 @@ public class Item extends javax.swing.JLayeredPane {
             }
         });
 
+        txt.setBackground(new java.awt.Color(20, 18, 24));
         txt.setColumns(20);
         txt.setRows(5);
         txt.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -244,13 +244,19 @@ public class Item extends javax.swing.JLayeredPane {
             g2.setColor(color);
             g2.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
             if (over) {
-                g2.setColor(new Color(0, 0, 0));
+                g2.setColor(new Color(20, 18, 24));
                 g2.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
                 g2.setColor(new Color(8, 62, 243));
                 g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 20, 20);
+                txt.setBackground(new Color(20,18,24));
+                txt.setForeground(new Color(230, 224, 233));
+                
             } else {
                 g2.setColor(color);
                 g2.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
+                txt.setBackground(color);
+                txt.setForeground(new Color(0,0,0));
+
             }
         }
         super.paintComponent(grphcs);
