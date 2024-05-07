@@ -21,7 +21,6 @@ public class FormManager {
     private boolean menuShowing = true;
     private final PanelSlider panelSlider;
     private final MainForm mainForm;
-    private final Menu menu;
 
     public static void install(JFrame frame) {
         instance = new FormManager(frame);
@@ -31,23 +30,18 @@ public class FormManager {
         this.frame = frame;
         panelSlider = new PanelSlider();
         mainForm = new MainForm();
-        menu = new Menu(new MyDrawerBuilder());
         this.frame.getContentPane().add(panelSlider);
     }
 
-    public static void showMenu() {
-        instance.menuShowing = true;
-        instance.panelSlider.addSlide(instance.menu, SimpleTransition.getShowMenuTransition(instance.menu.getDrawerBuilder().getDrawerWidth()));
-    }
+
 
     public static void showForm(SimpleForm component) {
         if (isNewFormAble()) {
             instance.forms.add(component);
             if (instance.menuShowing == true) {
                 instance.menuShowing = false;
-                Image oldImage = instance.panelSlider.createOldImage();
                 instance.mainForm.setForm(component);
-                instance.panelSlider.addSlide(instance.mainForm, SimpleTransition.getSwitchFormTransition(oldImage, instance.menu.getDrawerBuilder().getDrawerWidth()));
+                instance.panelSlider.addSlide(instance.mainForm, null);
             } else {
                 instance.mainForm.showForm(component);
             }
@@ -55,10 +49,7 @@ public class FormManager {
         }
     }
 
-    public static void hideMenu() {
-        instance.menuShowing = false;
-        instance.panelSlider.addSlide(instance.mainForm, SimpleTransition.getHideMenuTransition(instance.menu.getDrawerBuilder().getDrawerWidth()));
-    }
+ 
 
     public static void undo() {
         if (isNewFormAble()) {

@@ -52,9 +52,7 @@ public class MainForm extends JPanel {
         cmdUndo = createButton(new FlatSVGIcon("raven/resources/icon/undo.svg"));
         cmdRedo = createButton(new FlatSVGIcon("raven/resources/icon/redo.svg"));
         cmdRefresh = createButton(new FlatSVGIcon("raven/resources/icon/refresh.svg"));
-        cmdMenu.addActionListener(e -> {
-            FormManager.showMenu();
-        });
+    
         cmdUndo.addActionListener(e -> {
             FormManager.undo();
         });
