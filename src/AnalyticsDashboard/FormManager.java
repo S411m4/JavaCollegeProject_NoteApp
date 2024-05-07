@@ -7,7 +7,6 @@ package AnalyticsDashboard;
 import java.awt.Image;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-
 /**
  *
  * @author Dell
@@ -15,6 +14,7 @@ import javax.swing.SwingUtilities;
 public class FormManager {
     private static FormManager instance;
     private final JFrame frame;
+
 
     private boolean menuShowing = true;
     private final PanelSlider panelSlider;
@@ -31,12 +31,12 @@ public class FormManager {
         this.frame.getContentPane().add(panelSlider);
     }
 
-
+    public static void showMenu() {
+        instance.menuShowing = true;
+    }
 
     public static void showForm(SimpleForm component) {
-                instance.mainForm.setForm(component);
-                instance.panelSlider.addSlide(instance.mainForm, null);
-          
-        }
-    
+        instance.mainForm.setForm(component);
+        instance.panelSlider.addSlide(instance.mainForm);
+    }
 }

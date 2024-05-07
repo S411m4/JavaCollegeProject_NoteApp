@@ -6,10 +6,7 @@
 package AnalyticsDashboard;
 
 import com.formdev.flatlaf.FlatClientProperties;
-import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Component;
-import javax.swing.Icon;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import net.miginfocom.swing.MigLayout;
@@ -40,54 +37,11 @@ public class MainForm extends JPanel {
         scroll.getVerticalScrollBar().setUnitIncrement(10);
         add(scroll);
     }
-
-    private JPanel createHeader() {
-        JPanel panel = new JPanel(new MigLayout("insets 3"));
-        panel.putClientProperty(FlatClientProperties.STYLE, ""
-                + "background:null");
-
-        cmdMenu = createButton(new FlatSVGIcon("raven/resources/icon/menu.svg"));
-        cmdUndo = createButton(new FlatSVGIcon("raven/resources/icon/undo.svg"));
-        cmdRedo = createButton(new FlatSVGIcon("raven/resources/icon/redo.svg"));
-        cmdRefresh = createButton(new FlatSVGIcon("raven/resources/icon/refresh.svg"));
-    
-       
-
-        panel.add(cmdMenu);
-        panel.add(cmdUndo);
-        panel.add(cmdRedo);
-        panel.add(cmdRefresh);
-        return panel;
-    }
-
-    private JButton createButton(Icon icon) {
-        JButton button = new JButton(icon);
-        button.putClientProperty(FlatClientProperties.STYLE, ""
-                + "background:$Button.toolbar.background;"
-                + "arc:10;"
-                + "borderWidth:0;"
-                + "focusWidth:0;"
-                + "innerFocusWidth:0");
-        return button;
-    }
-
-    public void showForm(Component component, SliderTransition transition) {
-        panelSlider.addSlide(component, transition);
-        revalidate();
-    }
-
-    public void showForm(Component component) {
-        showForm(component, SimpleTransition.getDefaultTransition(false));
-    }
-
+ 
     public void setForm(Component component) {
-        panelSlider.addSlide(component, null);
+        panelSlider.addSlide(component);
     }
 
 
-    private JButton cmdMenu;
-    private JButton cmdUndo;
-    private JButton cmdRedo;
-    private JButton cmdRefresh;
     private PanelSlider panelSlider;
 }

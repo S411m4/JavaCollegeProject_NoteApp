@@ -38,7 +38,7 @@ public class PanelSlider extends JLayeredPane {
         panelSnapshot.setVisible(false);
     }
 
-    public void addSlide(Component component, SliderTransition transition) {
+    public void addSlide(Component component) {
         component.applyComponentOrientation(getComponentOrientation());
         if (this.component != null) {
             this.oldComponent = this.component;
@@ -51,21 +51,12 @@ public class PanelSlider extends JLayeredPane {
             component.setVisible(true);
         } else {
             add(component);
-            if (transition != null) {
-                doLayout();
-                SwingUtilities.updateComponentTreeUI(component);
-                SwingUtilities.invokeLater(() -> {
-                    Image oldImage = createImage(oldComponent);
-                    Image newImage = createImage(component);
-                    remove(oldComponent);
-                    panelSnapshot.animate(transition, oldImage, newImage);
-                });
-            } else {
+            
                 component.setVisible(true);
                 remove(oldComponent);
                 revalidate();
                 repaint();
-            }
+            
         }
     }
 
@@ -103,18 +94,16 @@ public class PanelSlider extends JLayeredPane {
         @Override
         public void updateUI() {
             super.updateUI();
-            if (sliderTransition != null && !sliderTransition.closeAfterAnimation()) {
                 if (oldComponent != null) {
                     SwingUtilities.updateComponentTreeUI(oldComponent);
                     oldImage = PanelSlider.this.createImage(oldComponent);
-                }
+                
             }
         }
 
         private final Animator animator;
         private float animate;
 
-        private SliderTransition sliderTransition;
         private Image oldImage;
         private Image newImage;
 
@@ -128,24 +117,22 @@ public class PanelSlider extends JLayeredPane {
 
                 @Override
                 public void end() {
-                    if (sliderTransition.closeAfterAnimation()) {
                         setVisible(false);
                         oldImage.flush();
                         newImage.flush();
-                    }
+                    
                     component.setVisible(true);
                 }
             });
             animator.setInterpolator(CubicBezierEasing.EASE);
         }
 
-        protected void animate(SliderTransition sliderTransition, Image oldImage, Image newImage) {
+        protected void animate(Image oldImage, Image newImage) {
             if (animator.isRunning()) {
                 animator.stop();
             }
             this.oldImage = oldImage;
             this.newImage = newImage;
-            this.sliderTransition = sliderTransition;
             this.animate = 0f;
             repaint();
             setVisible(true);
@@ -154,12 +141,10 @@ public class PanelSlider extends JLayeredPane {
 
         @Override
         public void paint(Graphics g) {
-            if (sliderTransition != null) {
                 int width = getWidth();
                 int height = getHeight();
-                sliderTransition.render(this, g, oldImage, newImage, width, height, animate);
             }
         }
     }
 
-}
+

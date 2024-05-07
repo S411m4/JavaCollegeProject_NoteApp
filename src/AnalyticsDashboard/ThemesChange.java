@@ -8,8 +8,6 @@ import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.extras.FlatAnimatedLafChange;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
-import com.formdev.flatlaf.themes.FlatMacDarkLaf;
-import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import java.awt.Color;
 import java.awt.EventQueue;
 import javax.swing.Icon;
@@ -24,6 +22,7 @@ public class ThemesChange extends JPanel {
 
     public ThemesChange() {
         init();
+        changeMode();
     }
 
     private Icon createIcon(String path) {
@@ -44,8 +43,6 @@ public class ThemesChange extends JPanel {
                 + "background:darken($Drawer.background,5%)");
         JButton buttonLight = new JButton(createIcon("raven/resources/icon/light.svg"));
         JButton buttonDark = new JButton(createIcon("raven/resources/icon/dark.svg"));
-        buttonLight.addActionListener(e -> changeMode(false));
-        buttonDark.addActionListener(e -> changeMode(true));
         buttonLight.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:999;"
                 + "[dark]background:null;"
@@ -68,23 +65,11 @@ public class ThemesChange extends JPanel {
         add(panel);
     }
 
-    private void changeMode(boolean dark) {
-        if (dark != FlatLaf.isLafDark()) {
-            if (dark) {
-                EventQueue.invokeLater(() -> {
-                    FlatAnimatedLafChange.showSnapshot();
-                    FlatMacDarkLaf.setup();
-                    FlatLaf.updateUI();
-                    FlatAnimatedLafChange.hideSnapshotWithAnimation();
-                });
-            } else {
-                EventQueue.invokeLater(() -> {
-                    FlatAnimatedLafChange.showSnapshot();
-                    FlatMacLightLaf.setup();
-                    FlatLaf.updateUI();
-                    FlatAnimatedLafChange.hideSnapshotWithAnimation();
-                });
-            }
-        }
+    private void changeMode() {
+    EventQueue.invokeLater(() -> {
+        FlatLaf.updateUI();
+        FlatAnimatedLafChange.hideSnapshotWithAnimation();
+    });
     }
+            
 }
