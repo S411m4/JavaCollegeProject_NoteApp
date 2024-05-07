@@ -8,6 +8,7 @@ import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.extras.FlatAnimatedLafChange;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import java.awt.Color;
 import java.awt.EventQueue;
 import javax.swing.Icon;
@@ -67,8 +68,10 @@ public class ThemesChange extends JPanel {
 
     private void changeMode() {
     EventQueue.invokeLater(() -> {
-        FlatLaf.updateUI();
-        FlatAnimatedLafChange.hideSnapshotWithAnimation();
+         FlatAnimatedLafChange.showSnapshot();
+                    FlatMacDarkLaf.setup();
+                    FlatLaf.updateUI();   
+                    FormManager.instance.updateTempFormUI();
     });
     }
             

@@ -6,7 +6,6 @@
 package AnalyticsDashboard;
 
 import com.formdev.flatlaf.FlatClientProperties;
-import java.awt.Component;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import net.miginfocom.swing.MigLayout;
@@ -27,8 +26,7 @@ public class MainForm extends JPanel {
                 + "border:5,5,5,5;"
                 + "arc:30");
         setLayout(new MigLayout("wrap,fillx", "[fill]", ""));
-        panelSlider  = new PanelSlider();
-        JScrollPane scroll = new JScrollPane(panelSlider);
+        JScrollPane scroll = new JScrollPane(null);
         scroll.putClientProperty(FlatClientProperties.STYLE, ""
                 + "border:0,0,0,0");
         scroll.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE, ""
@@ -37,11 +35,10 @@ public class MainForm extends JPanel {
         scroll.getVerticalScrollBar().setUnitIncrement(10);
         add(scroll);
     }
- 
-    public void setForm(Component component) {
-        panelSlider.addSlide(component);
+
+    public void setForm(SimpleForm form)
+    {
+        this.add(form);
     }
 
-
-    private PanelSlider panelSlider;
 }
