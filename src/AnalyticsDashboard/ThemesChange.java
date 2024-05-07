@@ -75,7 +75,6 @@ public class ThemesChange extends JPanel {
                     FlatAnimatedLafChange.showSnapshot();
                     FlatMacDarkLaf.setup();
                     FlatLaf.updateUI();
-                    FormManager.updateTempFormUI();
                     FlatAnimatedLafChange.hideSnapshotWithAnimation();
                 });
             } else {
@@ -83,7 +82,6 @@ public class ThemesChange extends JPanel {
                     FlatAnimatedLafChange.showSnapshot();
                     FlatMacLightLaf.setup();
                     FlatLaf.updateUI();
-                    FormManager.updateTempFormUI();
                     FlatAnimatedLafChange.hideSnapshotWithAnimation();
                 });
             }

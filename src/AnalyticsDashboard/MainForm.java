@@ -30,7 +30,6 @@ public class MainForm extends JPanel {
                 + "border:5,5,5,5;"
                 + "arc:30");
         setLayout(new MigLayout("wrap,fillx", "[fill]", ""));
-        header = createHeader();
         panelSlider  = new PanelSlider();
         JScrollPane scroll = new JScrollPane(panelSlider);
         scroll.putClientProperty(FlatClientProperties.STYLE, ""
@@ -39,7 +38,6 @@ public class MainForm extends JPanel {
                 + "trackArc:999;"
                 + "width:10");
         scroll.getVerticalScrollBar().setUnitIncrement(10);
-        add(header);
         add(scroll);
     }
 
@@ -53,15 +51,7 @@ public class MainForm extends JPanel {
         cmdRedo = createButton(new FlatSVGIcon("raven/resources/icon/redo.svg"));
         cmdRefresh = createButton(new FlatSVGIcon("raven/resources/icon/refresh.svg"));
     
-        cmdUndo.addActionListener(e -> {
-            FormManager.undo();
-        });
-        cmdRedo.addActionListener(e -> {
-            FormManager.redo();
-        });
-        cmdRefresh.addActionListener(e -> {
-            FormManager.refresh();
-        });
+       
 
         panel.add(cmdMenu);
         panel.add(cmdUndo);
@@ -82,7 +72,6 @@ public class MainForm extends JPanel {
     }
 
     public void showForm(Component component, SliderTransition transition) {
-        checkButton();
         panelSlider.addSlide(component, transition);
         revalidate();
     }
@@ -92,17 +81,10 @@ public class MainForm extends JPanel {
     }
 
     public void setForm(Component component) {
-        checkButton();
         panelSlider.addSlide(component, null);
     }
 
-    private void checkButton() {
-        cmdUndo.setEnabled(FormManager.getForms().isUndoAble());
-        cmdRedo.setEnabled(FormManager.getForms().isRedoAble());
-        cmdRefresh.setEnabled(FormManager.getForms().getCurrent() != null);
-    }
 
-    private JPanel header;
     private JButton cmdMenu;
     private JButton cmdUndo;
     private JButton cmdRedo;
