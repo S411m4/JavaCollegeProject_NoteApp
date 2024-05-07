@@ -4,6 +4,8 @@
  */
 package finalproject;
 
+import AnalyticsDashboard.AnalyticsApp;
+
 /**
  *
  * @author salma
@@ -72,6 +74,11 @@ public class UserPanel extends javax.swing.JPanel {
         jButton1.setBackground(new java.awt.Color(20, 18, 24));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/flat-color-icons_combo-chart.png"))); // NOI18N
         jButton1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "analytics", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe Print", 0, 12), new java.awt.Color(230, 224, 233))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout userInfoLayout = new javax.swing.GroupLayout(userInfo);
         userInfo.setLayout(userInfoLayout);
@@ -134,6 +141,12 @@ public class UserPanel extends javax.swing.JPanel {
     private void userNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_userNameActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         AnalyticsApp app = new AnalyticsApp();
+        app.setVisible(true); // Show the AnalyticsApp frame as a popup
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

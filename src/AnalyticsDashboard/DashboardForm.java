@@ -9,13 +9,17 @@ import com.formdev.flatlaf.FlatClientProperties;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import net.miginfocom.swing.MigLayout;
 import raven.chart.ChartLegendRenderer;
 import raven.chart.bar.HorizontalBarChart;
@@ -57,6 +61,30 @@ public class DashboardForm extends SimpleForm {
 
     private void init() {
         setLayout(new MigLayout("wrap,fill,gap 10", "fill"));
+        
+          // Title bar with close button
+        JPanel titleBar = new JPanel(new BorderLayout());
+        titleBar.setBackground(new Color(30, 30, 30)); // Dark color for the title bar
+        JLabel titleLabel = new JLabel("Dashboard");
+        titleLabel.setForeground(Color.WHITE); // White text
+        JButton closeButton = new JButton("X");
+        closeButton.addActionListener((ActionEvent event) -> {
+            JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            topFrame.dispose(); // Dispose the frame when button is clicked
+        });
+
+        // Style the close button
+        closeButton.setBorderPainted(false);
+        closeButton.setContentAreaFilled(false);
+        closeButton.setForeground(Color.WHITE);
+        closeButton.setFocusPainted(false);
+        closeButton.setOpaque(false);
+
+        titleBar.add(titleLabel, BorderLayout.CENTER);
+        titleBar.add(closeButton, BorderLayout.EAST);
+        add(titleBar, "span, growx"); // Ensure the title bar spans the entire width
+        
+        
         createPieChart();
         createLineChart();
         createBarChart();

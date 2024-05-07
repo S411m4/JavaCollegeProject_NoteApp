@@ -4,13 +4,11 @@
  * and open the template in the editor.
  */
 package AnalyticsDashboard;
-import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
-import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.formdev.flatlaf.util.UIScale;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -19,16 +17,17 @@ import raven.popup.GlassPanePopup;
  *
  * @author Dell
  */
-public class Application extends JFrame {
+public final class AnalyticsApp extends JFrame {
 
-    public Application() {
+    public AnalyticsApp() {  
+        setupTheme();
         init();
     }
 
     private void init() {
         setUndecorated(true);
         setBackground(new Color(0, 0, 0, 0));
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(UIScale.scale(new Dimension(1366, 768)));
         setLocationRelativeTo(null);
         setContentPane(new Background());
@@ -39,12 +38,11 @@ public class Application extends JFrame {
         // applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
     }
 
-    public static void main(String[] args) {
+    public void setupTheme(){
         FlatRobotoFont.install();
-        FlatLaf.registerCustomDefaultsSource("raven.themes");
         UIManager.put("defaultFont", new Font(FlatRobotoFont.FAMILY, Font.PLAIN, 13));
-        FlatMacLightLaf.setup();
-        EventQueue.invokeLater(() -> new Application().setVisible(true));
+        UIManager.put("Panel.background", new Color(20, 18, 24)); // Using the hex color #141218
+        FlatDarkLaf.setup();
     }
 }
    /* @SuppressWarnings("unchecked")
