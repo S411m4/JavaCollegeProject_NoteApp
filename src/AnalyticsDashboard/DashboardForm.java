@@ -146,8 +146,10 @@ public class DashboardForm extends SimpleForm {
         barChart1.setBarColor(Color.decode("#f97316"));
         barChart1.setDataset(createData());
         JPanel panel1 = new JPanel(new BorderLayout());
-        panel1.putClientProperty(FlatClientProperties.STYLE, ""
-                + "border:5,5,5,5,$Component.borderColor,,20");
+        panel1.setBackground(new Color(20,18,24));
+
+        //panel1.putClientProperty(FlatClientProperties.STYLE, ""
+               // + "border:5,5,5,5,$Component.borderColor,,20");
         panel1.add(barChart1);
         add(panel1, "split 2,gap 0 20");
 

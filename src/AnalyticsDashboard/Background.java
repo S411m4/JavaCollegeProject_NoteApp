@@ -8,6 +8,7 @@ import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.ui.FlatUIUtils;
 import com.formdev.flatlaf.util.UIScale;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JPanel;
@@ -37,6 +38,7 @@ public class Background extends JPanel {
         int arc = UIScale.scale(30);
         g2.setColor(getBackground());
         FlatUIUtils.paintComponentBackground(g2, 0, 0, getWidth(), getHeight(), 0, arc);
+        g2.setBackground(new Color(20,18,24));
         g2.dispose();
         super.paintComponent(g);
     }

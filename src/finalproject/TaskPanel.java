@@ -4,7 +4,9 @@
  */
 package finalproject;
 
+import javax.swing.plaf.metal.MetalCheckBoxUI;
 import DatabaseHelpers.DatabaseHelper;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -24,6 +26,7 @@ import models.NoteModel;
 import models.TaskModel;
 import java.awt.Component;
 import javax.swing.JDialog;
+import javax.swing.border.BevelBorder;
 import main.CalenderCustom;
 
 /**
@@ -42,6 +45,11 @@ public class TaskPanel extends javax.swing.JPanel {
         this.task = task;
 
         initComponents();
+        //reset style of checkbox to override flatlaf style
+        taskDone.setUI(new MetalCheckBoxUI());
+        taskDone.setForeground(Color.gray);
+        
+
         if (this.task.getState()) {
             taskDone.doClick();
         }

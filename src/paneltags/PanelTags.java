@@ -1,7 +1,9 @@
 package paneltags;
 
+import finalproject.NotesPreviewScrollPanel;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -12,7 +14,9 @@ import java.util.List;
 public class PanelTags extends javax.swing.JPanel {
     
     private EventTags event;
-
+    
+    public static List<String> tags;
+   
     public void addEventTags(EventTags event) {
         this.event = event;
         ((Item) getComponent(getComponentCount() - 1)).setEventTags(event);
@@ -27,6 +31,11 @@ public class PanelTags extends javax.swing.JPanel {
         setBackground(Color.WHITE);
         setLayout(new WrapLayout(WrapLayout.LEFT));
         Item input = new Item("");
+        tags = getAllItem();
+                                    if(NotesPreviewScrollPanel.Instance != null)                                                
+
+                                                        NotesPreviewScrollPanel.Instance.loadNotes();
+
         input.addEventKey(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent ke) {
@@ -44,9 +53,15 @@ public class PanelTags extends javax.swing.JPanel {
                     public void actionPerformed(ActionEvent ae) {
                         if (event.isRemoveAble(item, item.getText())) {
                             remove(item);
+                            tags.clear();
+                            tags = getAllItem();
+
                             refresh();
                             //  event remove
                             event.onItemRemove(item, item.getText());
+                            if(NotesPreviewScrollPanel.Instance != null)                                                
+                            NotesPreviewScrollPanel.Instance.loadNotes();
+
                         }
                     }
                 });
@@ -57,12 +72,37 @@ public class PanelTags extends javax.swing.JPanel {
                         event.onKeyType(item, item.getText(), ke);
                     }
                 });
-                add(item, getComponentCount()- 1);
-                event.onAddItem(item, item.getText());
-                refresh();
+                
+                if(canAddItem(item))
+                {
+                    add(item, getComponentCount()- 1);
+                    event.onAddItem(item, item.getText());
+                        tags.clear();
+                            tags = getAllItem();
+                   
+                    refresh();
+                                                if(NotesPreviewScrollPanel.Instance != null)                                                
+
+                                                NotesPreviewScrollPanel.Instance.loadNotes();
+
+                }
+              
             }
         });
         add(input);
+    }
+    
+    private boolean canAddItem(Item newItem)
+    {
+        Dimension totalSize = new Dimension(0, newItem.getPreferredSize().height);
+        for(Component comp: getComponents())
+        {
+            Dimension d = comp.getPreferredSize();
+            totalSize.width += d.width;
+            if(totalSize.width > getWidth())
+               return false;
+        }
+        return true;
     }
     
     private void refresh() {

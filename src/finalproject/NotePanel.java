@@ -6,6 +6,7 @@ package finalproject;
 
 import customSwingComponents.ScrollBar;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -28,8 +29,13 @@ public class NotePanel extends javax.swing.JPanel {
      */
     public NotePanel(NoteModel note) {
         this.note = note;
-
+        
+      
         initComponents();
+        title.setBackground(Color.white);
+        content.setBackground(Color.white);
+        content.setForeground(Color.BLACK);
+        content.setFont(new Font("Segoe Print", Font.PLAIN, 12));
         contentScroll.setVerticalScrollBar(new ScrollBar());
         contentScroll.getVerticalScrollBar().setBackground(Color.WHITE);
         String lastEditedDateString = note.getLastEditedDate() == null ? note.getCreatedDate() : note.getLastEditedDate();
@@ -243,6 +249,7 @@ public class NotePanel extends javax.swing.JPanel {
         contentScroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         content.setColumns(20);
+        content.setFont(new java.awt.Font("Segoe Print", 0, 12)); // NOI18N
         content.setLineWrap(true);
         content.setRows(5);
         content.setWrapStyleWord(true);

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import models.NoteModel;
 import models.TaskModel;
 import net.miginfocom.swing.MigLayout;
+import paneltags.PanelTags;
 
 /**
  *
@@ -18,6 +19,7 @@ import net.miginfocom.swing.MigLayout;
 public class NotesPreviewScrollPanel extends javax.swing.JPanel {
 
     public static NotesPreviewScrollPanel Instance;
+    public static ArrayList<NotePreviewPanel> notesPreview = new ArrayList<NotePreviewPanel>();
     /**
      * Creates new form ToDoPanel
      */
@@ -30,16 +32,27 @@ public class NotesPreviewScrollPanel extends javax.swing.JPanel {
         notesPreviewScrollPanel.setViewportBorder(null);
         notesPreviewList.setLayout(new MigLayout("inset 0, fillx, wrap", "[fill]"));
         
-
-
+    }
+    
+    public void updateNotesTags()
+    {
+        for(NotePreviewPanel notePreview: notesPreview)
+        {
+            
+        }
     }
     
     public void loadNotes()
     {
         notesPreviewList.removeAll();
+        notesPreview.clear();
         for(NoteModel note : DatabaseHelper.notes)
         {
-            notesPreviewList.add(new NotePreviewPanel(note));
+            NotePreviewPanel preview = new NotePreviewPanel(note);
+            notesPreview.add(preview);
+            if(PanelTags.tags != null)
+                preview.updateTags(PanelTags.tags);
+            notesPreviewList.add(preview);
             //System.out.println("Loaded: " + note);
         }
         revalidate();
