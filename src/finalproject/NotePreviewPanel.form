@@ -55,7 +55,6 @@
                           <Component id="createdDatePanel" max="32767" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="lastEditedDatePanel" max="32767" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="noteContent" min="-2" pref="571" max="-2" attributes="0"/>
@@ -229,7 +228,7 @@
                       <Component id="noteTitle" min="-2" pref="486" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="tagsComboBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="editBtn" min="-2" pref="48" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="deleteNoteBtn" min="-2" pref="48" max="-2" attributes="0"/>

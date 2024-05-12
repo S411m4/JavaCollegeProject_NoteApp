@@ -25,6 +25,8 @@ public class NoteModel {
     private String content;
     private String createdDate;
     private String lastEditedDate;
+        private String tag; // New attribute for the tag
+
     //private ArrayList<ToDoModel> todos = new ArrayList<ToDoModel>();
 
     public NoteModel(){
@@ -37,7 +39,13 @@ public class NoteModel {
         lastEditedDate = currentDateTime.format(formatter);
     
     }
-    
+      public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
     
     public int getID() {
         return id;
@@ -80,23 +88,27 @@ public class NoteModel {
     }
 
     public boolean Save() {
-        String sql = "UPDATE notes SET title=?, content=?, lastEditedDate=? WHERE ID=?";
+        // Updated SQL to include the 'tag' column
+        String sql = "UPDATE notes SET title=?, content=?, lastEditedDate=?, tag=? WHERE ID=?";
         LocalDateTime currentDateTime = LocalDateTime.now();
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-        try (Connection conn = DriverManager.getConnection(DatabaseHelper.URL); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DriverManager.getConnection(DatabaseHelper.URL); 
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, this.title);
             pstmt.setString(2, this.content);
             pstmt.setString(3, currentDateTime.format(formatter));
-            pstmt.setInt(4, this.id);
+            pstmt.setString(4, this.tag); // Set the tag
+            pstmt.setInt(5, this.id);
             pstmt.executeUpdate();
-            lastEditedDate = currentDateTime.format(formatter);
+            lastEditedDate = currentDateTime.format(formatter); // Update last edited date
             return true;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("Failed to save note: " + e.getMessage());
             return false;
         }
     }
+
     
     public boolean Delete(){
         String sql = "DELETE FROM notes WHERE ID=?";

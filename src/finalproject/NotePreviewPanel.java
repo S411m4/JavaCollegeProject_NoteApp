@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import models.NoteModel;
@@ -18,20 +19,24 @@ import models.NoteModel;
  *
  * @author salma
  */
-public class NotePreviewPanel extends javax.swing.JPanel{
+public class NotePreviewPanel extends javax.swing.JPanel {
 
     private NoteModel note;
+
     /**
      * Creates new form NotePanel
      */
     public void updateTags(List<String> newTags) {
         tagsComboBox.removeAllItems();//clear existing items
-        for(String tag: newTags)
+        for (String tag : newTags) {
             tagsComboBox.addItem(tag);
+        }
     }
+
     public NotePreviewPanel(NoteModel note) {
         this.note = note;
         initComponents();
+
         noteContent.setBackground(Color.white);
         noteContent.setForeground(Color.black);
         noteContent.setFont(new Font("Segoe Print", Font.PLAIN, 12));
@@ -39,12 +44,15 @@ public class NotePreviewPanel extends javax.swing.JPanel{
 
         noteTitle.setText(note.getTitle());
         noteContent.setText(note.getContent());
-        
+
         String lastEditedDateString = note.getLastEditedDate() == null ? note.getCreatedDate() : note.getLastEditedDate();
         lastEdited.setText(lastEditedDateString);
         createdDate.setText(note.getCreatedDate());
-        
-           noteContent.addKeyListener(new KeyListener() {
+        tagsComboBox.setSelectedItem(note.getTag()); // Set selected item based on note's current tag
+
+        tagsComboBox.addActionListener(e -> saveTag());
+
+        noteContent.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
             }
@@ -69,8 +77,22 @@ public class NotePreviewPanel extends javax.swing.JPanel{
             }
         });
     }
-    
-    
+
+//    public void loadComboBox() {
+//        for (String item : DatabaseHelper.tags) {
+//            tagsComboBox.addItem(item);
+//        }
+//    }
+
+    private void saveTag() {
+        String selectedTag = (String) tagsComboBox.getSelectedItem();
+        if (selectedTag == null || selectedTag.isEmpty()) {
+            selectedTag = "none";
+        }
+        note.setTag(selectedTag);
+        note.Save();
+    }
+
     private void save() {
         note.setTitle(noteTitle.getText());
         note.setContent(noteContent.getText());
@@ -218,7 +240,7 @@ public class NotePreviewPanel extends javax.swing.JPanel{
                 .addComponent(noteTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(tagsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(deleteNoteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -251,11 +273,10 @@ public class NotePreviewPanel extends javax.swing.JPanel{
                     .addGroup(panelBorder1Layout.createSequentialGroup()
                         .addComponent(createdDatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lastEditedDatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE))
+                        .addComponent(lastEditedDatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelBorder1Layout.createSequentialGroup()
                         .addComponent(noteContent, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 85, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelBorder1Layout.setVerticalGroup(
@@ -291,16 +312,15 @@ public class NotePreviewPanel extends javax.swing.JPanel{
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void deleteNoteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteNoteBtnActionPerformed
-        
+
         String answer = JOptionPane.showInputDialog(this, "Enter delete to (delete) note: ");
-        
-        if(answer.toLowerCase().compareTo("delete") == 0)
-        {
+
+        if (answer.toLowerCase().compareTo("delete") == 0) {
             note.Delete();
-            NotesPreviewScrollPanel.Instance.loadNotes();   
+            NotesPreviewScrollPanel.Instance.loadNotes();
         }
-        
-       
+
+
     }//GEN-LAST:event_deleteNoteBtnActionPerformed
 
 
@@ -321,5 +341,4 @@ public class NotePreviewPanel extends javax.swing.JPanel{
     private javax.swing.JComboBox<String> tagsComboBox;
     // End of variables declaration//GEN-END:variables
 
-    
 }

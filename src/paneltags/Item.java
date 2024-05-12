@@ -50,9 +50,9 @@ public class Item extends javax.swing.JLayeredPane {
     
     private Color color;
     
-    public Item(String text) {
+    public Item(String text, Color color) {
+        this.color = color;
         initComponents();                   
-        color = generateRandomColor();
         txt.setText(text);
         txt.setFocusable(false);
 
@@ -78,6 +78,8 @@ public class Item extends javax.swing.JLayeredPane {
             }
         });
     }
+    
+    public Color getTagColor(){return color;}
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
