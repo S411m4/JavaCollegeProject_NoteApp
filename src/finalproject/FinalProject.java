@@ -17,6 +17,7 @@ public class FinalProject {
      */
     public static void main(String[] args) {
         DatabaseHelper.setupDatabase();
+        DatabaseHelper.getAllTags();
        HomeFrame home = new HomeFrame();
        home.runClass();
     }

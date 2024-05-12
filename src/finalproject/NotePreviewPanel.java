@@ -44,6 +44,8 @@ public class NotePreviewPanel extends javax.swing.JPanel{
         lastEdited.setText(lastEditedDateString);
         createdDate.setText(note.getCreatedDate());
         
+        tagsComboBox.addActionListener(e -> updateTag());
+        
            noteContent.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -70,6 +72,12 @@ public class NotePreviewPanel extends javax.swing.JPanel{
         });
     }
     
+    private void updateTag()
+    {
+        String selectedTag = (String) tagsComboBox.getSelectedItem();
+        note.setTag(selectedTag);
+        note.Save();
+    }
     
     private void save() {
         note.setTitle(noteTitle.getText());

@@ -20,7 +20,7 @@ public class DatabaseHelper {
     
     public static ArrayList<NoteModel> notes = new ArrayList<NoteModel>(); 
     public static ArrayList<TaskModel> tasks = new ArrayList<TaskModel>(); 
-    
+    public static ArrayList<String> tags = new ArrayList<String>();
     //public static final String URL = "jdbc:sqlite:G:/college/year_1/Term_2/Java/CollegeProjectCode/SQLTest/DB/mydatabase.db";
     
     public DatabaseHelper(){}
@@ -40,6 +40,7 @@ public class DatabaseHelper {
                 note.setId(rs.getInt("ID"));
                 note.setLastEditedDate(rs.getString("lastEditedDate"));
                 note.setCreatedDate(rs.getString("createdDate"));
+                note.setTag(rs.getString("tag"));
                 //Add more fields as necessary
                 notes.add(note);   
             }
@@ -70,18 +71,42 @@ public class DatabaseHelper {
         return taskss;
     }
       
+      public static void getAllTags()
+      {
+        String sql = "SELECT tag FROM notes WHERE tag <> ?"; // SQL query
+        
+          try (Connection conn = DriverManager.getConnection(URL);
+             var pstmt = conn.prepareStatement(sql)) {
+             pstmt.setString(1, "NULL"); // Set the value to skip 'NULL' tag
+
+
+            try (var rs = pstmt.executeQuery()) {
+
+                while (rs.next()) {
+                    String tag = rs.getString("tag");
+                    if (!tags.contains(tag)) {
+                        tags.add(tag);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error fetching tags: " + e.getMessage());
+        }
+      }
+      
     public static void setupDatabase() {
         try (Connection conn = DriverManager.getConnection(URL)) {
             if (conn != null) {
                 try (Statement stmt = conn.createStatement()) {
                     // SQL statement for creating a new table
-                    String sql = "CREATE TABLE IF NOT EXISTS notes (\n"
-                            + " ID integer PRIMARY KEY AUTOINCREMENT,\n"
-                            + " title text,\n"
-                            + " content text,\n" 
-                            + " lastEditedDate datetime,\n"
-                            + " createdDate datetime DEFAULT CURRENT_TIMESTAMP\n"
-                            + ");";
+                     String sql = "CREATE TABLE IF NOT EXISTS notes (\n"
+                        + " ID integer PRIMARY KEY AUTOINCREMENT,\n"
+                        + " title text,\n"
+                        + " content text,\n" 
+                        + " lastEditedDate datetime,\n"
+                        + " createdDate datetime DEFAULT CURRENT_TIMESTAMP,\n"
+                        + " tag text\n" // Add this line for the tag
+                        + ");";
                     
                     stmt.execute(sql);
                     

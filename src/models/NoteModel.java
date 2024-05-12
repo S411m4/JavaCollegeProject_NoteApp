@@ -25,6 +25,7 @@ public class NoteModel {
     private String content;
     private String createdDate;
     private String lastEditedDate;
+    private String tag;
     //private ArrayList<ToDoModel> todos = new ArrayList<ToDoModel>();
 
     public NoteModel(){
@@ -38,6 +39,8 @@ public class NoteModel {
     
     }
     
+    public String getTag(){return tag;}
+    public void setTag(String tag){this.tag = tag;}
     
     public int getID() {
         return id;
@@ -80,7 +83,7 @@ public class NoteModel {
     }
 
     public boolean Save() {
-        String sql = "UPDATE notes SET title=?, content=?, lastEditedDate=? WHERE ID=?";
+        String sql = "UPDATE notes SET title=?, content=?, lastEditedDate=?, tag=? WHERE ID=?";
         LocalDateTime currentDateTime = LocalDateTime.now();
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
@@ -88,7 +91,9 @@ public class NoteModel {
             pstmt.setString(1, this.title);
             pstmt.setString(2, this.content);
             pstmt.setString(3, currentDateTime.format(formatter));
-            pstmt.setInt(4, this.id);
+            pstmt.setString(4, this.tag);
+            pstmt.setInt(5, this.id);
+            
             pstmt.executeUpdate();
             lastEditedDate = currentDateTime.format(formatter);
             return true;
