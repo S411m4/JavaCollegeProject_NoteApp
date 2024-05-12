@@ -9,32 +9,34 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PanelTags extends javax.swing.JPanel {
-    
+
     private EventTags event;
-    
-    public static List<String> tags;
-   
+
+    public static ArrayList<String> tags;
+    private ArrayList<Color> tagsColor = new ArrayList<Color>(Arrays.asList(Color.gray, Color.yellow, Color.magenta, Color.cyan,Color.red, Color.green));
+
     public void addEventTags(EventTags event) {
         this.event = event;
         ((Item) getComponent(getComponentCount() - 1)).setEventTags(event);
     }
-    
+
     public PanelTags() {
         initComponents();
         init();
     }
-    
+
     private void init() {
         setBackground(Color.WHITE);
         setLayout(new WrapLayout(WrapLayout.LEFT));
-        Item input = new Item("");
+        Item input = new Item("", Color.black);
         tags = getAllItem();
-                                    if(NotesPreviewScrollPanel.Instance != null)                                                
-
-                                                        NotesPreviewScrollPanel.Instance.loadNotes();
+        if (NotesPreviewScrollPanel.Instance != null) {
+            NotesPreviewScrollPanel.Instance.loadNotes();
+        }
 
         input.addEventKey(new KeyAdapter() {
             @Override
@@ -45,13 +47,15 @@ public class PanelTags extends javax.swing.JPanel {
         input.addEventForInput(new EventInput() {
             @Override
             public void addItem(String text) {
-                Item item = new Item(text);
-                item.addEventMouse(); 
+                Color color = tagsColor.removeLast();
+                Item item = new Item(text, color);
+                item.addEventMouse();
                 item.setEventTags(event);
                 item.addEventRemove(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent ae) {
                         if (event.isRemoveAble(item, item.getText())) {
+                            tagsColor.add(item.getTagColor());
                             remove(item);
                             tags.clear();
                             tags = getAllItem();
@@ -59,8 +63,9 @@ public class PanelTags extends javax.swing.JPanel {
                             refresh();
                             //  event remove
                             event.onItemRemove(item, item.getText());
-                            if(NotesPreviewScrollPanel.Instance != null)                                                
-                            NotesPreviewScrollPanel.Instance.loadNotes();
+                            if (NotesPreviewScrollPanel.Instance != null) {
+                                NotesPreviewScrollPanel.Instance.loadNotes();
+                            }
 
                         }
                     }
@@ -72,46 +77,48 @@ public class PanelTags extends javax.swing.JPanel {
                         event.onKeyType(item, item.getText(), ke);
                     }
                 });
-                
-                if(canAddItem(item))
-                {
-                    add(item, getComponentCount()- 1);
-                    event.onAddItem(item, item.getText());
-                        tags.clear();
-                            tags = getAllItem();
-                   
-                    refresh();
-                                                if(NotesPreviewScrollPanel.Instance != null)                                                
 
-                                                NotesPreviewScrollPanel.Instance.loadNotes();
+                if (canAddItem(item)) {
+                    add(item, getComponentCount() - 1);
+                    event.onAddItem(item, item.getText());
+                    tags.clear();
+                    tags = getAllItem();
+
+                    refresh();
+                    if (NotesPreviewScrollPanel.Instance != null) {
+                        NotesPreviewScrollPanel.Instance.loadNotes();
+                    }
 
                 }
-              
+                else
+                {
+                    tagsColor.add(color);
+                }
+
             }
         });
         add(input);
     }
-    
-    private boolean canAddItem(Item newItem)
-    {
+
+    private boolean canAddItem(Item newItem) {
         Dimension totalSize = new Dimension(0, newItem.getPreferredSize().height);
-        for(Component comp: getComponents())
-        {
+        for (Component comp : getComponents()) {
             Dimension d = comp.getPreferredSize();
             totalSize.width += d.width;
-            if(totalSize.width > getWidth())
-               return false;
+            if (totalSize.width > getWidth()) {
+                return false;
+            }
         }
         return true;
     }
-    
+
     private void refresh() {
         repaint();
         revalidate();
     }
-    
-    public List<String> getAllItem() {
-        List<String> list = new ArrayList<>();
+
+    public ArrayList<String> getAllItem() {
+        ArrayList<String> list = new ArrayList<>();
         for (Component com : getComponents()) {
             Item item = (Item) com;
             if (!item.isInput()) {
@@ -120,7 +127,7 @@ public class PanelTags extends javax.swing.JPanel {
         }
         return list;
     }
-    
+
     public List<String> getAllItemExit(Component exit) {
         List<String> list = new ArrayList<>();
         for (Component com : getComponents()) {
@@ -131,7 +138,7 @@ public class PanelTags extends javax.swing.JPanel {
         }
         return list;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

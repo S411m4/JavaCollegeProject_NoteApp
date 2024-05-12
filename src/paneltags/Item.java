@@ -50,9 +50,11 @@ public class Item extends javax.swing.JLayeredPane {
     
     private Color color;
     
-    public Item(String text) {
-        initComponents();                   
-        color = generateRandomColor();
+    public Color getTagColor(){return color;}
+    
+    public Item(String text, Color tagColor) {
+        initComponents();         
+        this.color = tagColor;
         txt.setText(text);
         txt.setFocusable(false);
 
