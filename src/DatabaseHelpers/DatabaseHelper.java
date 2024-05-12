@@ -71,7 +71,7 @@ public class DatabaseHelper {
         return taskss;
     }
       
-      public static void getAllTags()
+      public static ArrayList<String> getAllTags()
       {
         String sql = "SELECT tag FROM notes WHERE tag <> ?"; // SQL query
         
@@ -92,6 +92,7 @@ public class DatabaseHelper {
         } catch (Exception e) {
             System.out.println("Error fetching tags: " + e.getMessage());
         }
+          return tags;
       }
       
     public static void setupDatabase() {

@@ -4,6 +4,8 @@
  */
 package finalproject;
 
+import java.awt.Color;
+
 /**
  *
  * @author salma
@@ -17,7 +19,10 @@ public class HomePanel extends javax.swing.JPanel {
     //ToDo add delete in:
     //home panel set active true
     //delete note
-    public HomePanel() {
+    public HomePanel() {    
+        setBackground(Color.darkGray);
+
+        
         initComponents();
         toDoPanel.LoadTasks();
     }

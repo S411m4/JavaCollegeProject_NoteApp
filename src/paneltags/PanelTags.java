@@ -1,5 +1,6 @@
 package paneltags;
 
+import DatabaseHelpers.DatabaseHelper;
 import finalproject.NotesPreviewScrollPanel;
 import java.awt.Color;
 import java.awt.Component;
@@ -16,8 +17,8 @@ public class PanelTags extends javax.swing.JPanel {
 
     private EventTags event;
 
-    public static ArrayList<String> tags;
-    private ArrayList<Color> tagsColor = new ArrayList<Color>(Arrays.asList(Color.gray, Color.yellow, Color.magenta, Color.cyan,Color.red, Color.green));
+    public static ArrayList<String> tags = new ArrayList<String>();
+    private ArrayList<Color> tagsColor = new ArrayList<Color>(Arrays.asList(Color.gray, Color.yellow, Color.magenta, Color.cyan, Color.red, Color.green));
 
     public void addEventTags(EventTags event) {
         this.event = event;
@@ -47,57 +48,69 @@ public class PanelTags extends javax.swing.JPanel {
         input.addEventForInput(new EventInput() {
             @Override
             public void addItem(String text) {
-                Color color = tagsColor.removeLast();
-                Item item = new Item(text, color);
-                item.addEventMouse();
-                item.setEventTags(event);
-                item.addEventRemove(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent ae) {
-                        if (event.isRemoveAble(item, item.getText())) {
-                            tagsColor.add(item.getTagColor());
-                            remove(item);
-                            tags.clear();
-                            tags = getAllItem();
+                if (!tagsColor.isEmpty()) { // Ensure there is a color available
+                    Color tagColor = tagsColor.removeLast();
+                    createNewTag(text, tagColor);
+                }
+            }
+        });
+        add(input);
+                loadTagsFromDB();
 
-                            refresh();
-                            //  event remove
-                            event.onItemRemove(item, item.getText());
-                            if (NotesPreviewScrollPanel.Instance != null) {
-                                NotesPreviewScrollPanel.Instance.loadNotes();
-                            }
 
-                        }
-                    }
-                });
-                item.addEventKey(new KeyAdapter() {
-                    @Override
-                    public void keyReleased(KeyEvent ke) {
-                        //    event key
-                        event.onKeyType(item, item.getText(), ke);
-                    }
-                });
+    }
 
-                if (canAddItem(item)) {
-                    add(item, getComponentCount() - 1);
-                    event.onAddItem(item, item.getText());
+    private void createNewTag(String text, Color color) {
+        Item item = new Item(text, color);
+        item.addEventMouse();
+
+        item.setEventTags(event);
+        item.addEventRemove(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                if (event.isRemoveAble(item, item.getText())) {
+                    tagsColor.add(item.getTagColor());
+                    remove(item);
                     tags.clear();
                     tags = getAllItem();
 
                     refresh();
+                    //  event remove
+                    event.onItemRemove(item, item.getText());
                     if (NotesPreviewScrollPanel.Instance != null) {
                         NotesPreviewScrollPanel.Instance.loadNotes();
                     }
 
                 }
-                else
-                {
-                    tagsColor.add(color);
-                }
-
             }
         });
-        add(input);
+        item.addEventKey(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent ke) {
+                //    event key
+                event.onKeyType(item, item.getText(), ke);
+            }
+        });
+
+        add(item, getComponentCount() - 1);
+//       event.onAddItem(item, item.getText());
+        tags.clear();
+        tags = getAllItem();
+
+        refresh();
+        if (NotesPreviewScrollPanel.Instance != null) {
+            NotesPreviewScrollPanel.Instance.loadNotes();
+        }
+
+    }
+
+    private void loadTagsFromDB() {
+        for (String tag : DatabaseHelper.tags){
+            System.out.println("DB: " + tag);
+            Color color = tagsColor.removeLast();
+            createNewTag(tag, color);
+
+        }
     }
 
     private boolean canAddItem(Item newItem) {
