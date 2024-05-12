@@ -8,13 +8,19 @@ import DatabaseHelpers.DatabaseHelper;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.text.SimpleDateFormat;
 
 /**
  *
  * @author salma
  */
+
 public class TaskModel {
     String task;
+    String dueDateTime;
+    
+    public String getDueDateTime(){return dueDateTime;}
+    public void setDueDateTime(String dueDateTime){this.dueDateTime = dueDateTime;}
 
     public String getTask() {
         return task;
@@ -88,11 +94,12 @@ public class TaskModel {
     }
     
     public boolean Save(){
-    String sql = "UPDATE tasks SET title=?, state=? WHERE ID=?";
+        String sql = "UPDATE tasks SET title=?, state=?, dueDateTime=? WHERE ID=?";
         try (Connection conn = DriverManager.getConnection(DatabaseHelper.URL); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, this.task);
+         pstmt.setString(1, this.task);
             pstmt.setBoolean(2, this.checked);
-            pstmt.setInt(3, this.ID);
+            pstmt.setString(3, dueDateTime); // Set formatted date
+            pstmt.setInt(4, this.ID);
             pstmt.executeUpdate();
             return true;
         } catch (Exception e) {

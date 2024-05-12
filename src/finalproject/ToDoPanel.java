@@ -169,7 +169,7 @@ public class ToDoPanel extends javax.swing.JPanel {
             }
         }
         
-                    LoadTasks();
+                    loadTasks();
 
     }//GEN-LAST:event_clearFinishedTasksBtnActionPerformed
 
@@ -178,7 +178,7 @@ public class ToDoPanel extends javax.swing.JPanel {
          revalidate(); //to repaint the panel after adding new task
     }//GEN-LAST:event_AddTaskBtn1ActionPerformed
 
-    public void LoadTasks(){
+    public void loadTasks(){
     
         tasksList.removeAll();
         for(TaskModel task : DatabaseHelper.tasks)

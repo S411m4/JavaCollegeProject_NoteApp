@@ -24,7 +24,7 @@ public class HomePanel extends javax.swing.JPanel {
 
         
         initComponents();
-        toDoPanel.LoadTasks();
+        toDoPanel.loadTasks();
     }
 
     /**

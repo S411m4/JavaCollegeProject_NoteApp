@@ -31,6 +31,7 @@ public class PanelDate extends javax.swing.JLayeredPane {
     
     public String getSelectedDate()
     {
+        if(selectedCell == null) return null;
         
         return selectedCell.getDay() + "-" + selectedCell.getMonth() + "-" + selectedCell.getYear();
         

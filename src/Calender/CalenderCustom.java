@@ -7,8 +7,10 @@ import customSwingComponents.PanelSlide;
 import com.raven.swing.TimePicker;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import models.TaskModel;
 
 
 public class CalenderCustom extends javax.swing.JPanel {
@@ -20,10 +22,12 @@ public class CalenderCustom extends javax.swing.JPanel {
     private JDialog parentDialog;
     private String dueDateTimeString = null;
     private JButton DueDateBtn;
+    private TaskModel task;
     
-    public CalenderCustom(JDialog parentDialog, JButton DueDateBtn) {
+    public CalenderCustom(JDialog parentDialog, JButton DueDateBtn, TaskModel task) {
         this.parentDialog = parentDialog;
         this.DueDateBtn = DueDateBtn;
+        this.task = task;
         initComponents();
         setTitleDate();
          panelDate = new PanelDate(month, year);
@@ -34,13 +38,18 @@ public class CalenderCustom extends javax.swing.JPanel {
          timePicker.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //System.out.println("Time Selected " + timePicker.getSelectedTime());
+                System.out.println("Time Selected " + timePicker.getSelectedTime());
                 dueDateTimeString += timePicker.getSelectedTime();
                 DueDateBtn.setToolTipText(dueDateTimeString);
+                task.setDueDateTime(dueDateTimeString);
+                task.Save();
             }
         });
          
     }
+    
+  
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -175,8 +184,8 @@ public class CalenderCustom extends javax.swing.JPanel {
 
     private void okBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okBtnActionPerformed
         
-        dueDateTimeString = panelDate.getSelectedDate() + ", ";
-//        System.out.println("selected date: " + panelDate.getSelectedDate());
+        if(panelDate.getSelectedDate() == null) return;
+        dueDateTimeString = panelDate.getSelectedDate() + ", " ;
         
         timePicker.showPopup(null, 10, 10);
         if(parentDialog != null)

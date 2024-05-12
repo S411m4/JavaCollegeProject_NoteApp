@@ -45,6 +45,8 @@ public class TaskPanel extends javax.swing.JPanel {
         this.task = task;
 
         initComponents();
+                this.setDueDateBtn.setToolTipText(task.getDueDateTime());
+
         //reset style of checkbox to override flatlaf style
         taskDone.setUI(new MetalCheckBoxUI());
         taskDone.setForeground(Color.gray);
@@ -75,7 +77,7 @@ public class TaskPanel extends javax.swing.JPanel {
     public TaskPanel() {
         initComponents();
         
-        
+
     }
 
     /**
@@ -175,7 +177,7 @@ public class TaskPanel extends javax.swing.JPanel {
         JDialog dialog = new JDialog();
         dialog.setSize(600,500);
         dialog.setLocationRelativeTo(this);
-        CalenderCustom calender = new CalenderCustom(dialog, setDueDateBtn);
+        CalenderCustom calender = new CalenderCustom(dialog, setDueDateBtn, task);
         dialog.add(calender);
         dialog.setVisible(true);
         repaint();

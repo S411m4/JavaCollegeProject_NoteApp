@@ -62,6 +62,7 @@ public class DatabaseHelper {
                 task.setTask(rs.getString("title"));
                 task.setID(rs.getInt("ID"));
                 task.setChecked(rs.getBoolean("state"));
+                task.setDueDateTime(rs.getString("dueDateTime"));
                 //Add more fields as necessary
                 taskss.add(task);   
             }
@@ -115,7 +116,8 @@ public class DatabaseHelper {
                             + " ID integer PRIMARY KEY AUTOINCREMENT,\n"
                             + " title text,\n"
                             + " state bool,\n" 
-                            + " createdDate datetime DEFAULT CURRENT_TIMESTAMP\n"
+                            + " createdDate datetime DEFAULT CURRENT_TIMESTAMP,\n"
+                            + " dueDateTime text\n"
                             + ");";
                     stmt.execute(sql);
                     notes = getAllNotes();
