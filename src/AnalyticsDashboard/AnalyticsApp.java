@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package AnalyticsDashboard;
+
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.util.UIScale;
@@ -12,6 +13,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
+
 import raven.popup.GlassPanePopup;
 /**
  *
@@ -20,7 +22,7 @@ import raven.popup.GlassPanePopup;
 public final class AnalyticsApp extends JFrame {
 
     public AnalyticsApp() {  
-        setupTheme();
+
         init();
     }
 
@@ -36,11 +38,12 @@ public final class AnalyticsApp extends JFrame {
         FormManager.showForm(new DashboardForm());
     }
 
-    public void setupTheme(){
+    public static void setupTheme(){
         FlatRobotoFont.install();
         UIManager.put("defaultFont", new Font(FlatRobotoFont.FAMILY, Font.PLAIN, 13));
         UIManager.put("Panel.background", new Color(20, 18, 24)); // Using the hex color #141218
         FlatDarkLaf.setup();
     }
+  
 }
   

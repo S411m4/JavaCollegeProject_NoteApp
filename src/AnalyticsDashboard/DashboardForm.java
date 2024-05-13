@@ -41,7 +41,7 @@ public class DashboardForm extends SimpleForm {
 
     @Override
     public void formRefresh() {
-        lineChart.startAnimation();
+        //lineChart.startAnimation();
         pieChart1.startAnimation();
         pieChart2.startAnimation();
         pieChart3.startAnimation();
@@ -51,12 +51,11 @@ public class DashboardForm extends SimpleForm {
 
     @Override
     public void formInitAndOpen() {
-        System.out.println("init and open");
+        
     }
 
     @Override
     public void formOpen() {
-        System.out.println("Open");
     }
 
     private void init() {

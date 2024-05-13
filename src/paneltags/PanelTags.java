@@ -1,6 +1,6 @@
+
 package paneltags;
 
-import DatabaseHelpers.DatabaseHelper;
 import finalproject.NotesPreviewScrollPanel;
 import java.awt.Color;
 import java.awt.Component;
@@ -12,6 +12,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 
 public class PanelTags extends javax.swing.JPanel {
 
@@ -34,7 +35,6 @@ public class PanelTags extends javax.swing.JPanel {
         setBackground(Color.WHITE);
         setLayout(new WrapLayout(WrapLayout.LEFT));
         Item input = new Item("", Color.black);
-        tags = getAllItem();
         if (NotesPreviewScrollPanel.Instance != null) {
             NotesPreviewScrollPanel.Instance.loadNotes();
         }
@@ -55,7 +55,9 @@ public class PanelTags extends javax.swing.JPanel {
             }
         });
         add(input);
-                loadTagsFromDB();
+                
+        System.out.println("Loaded");
+
 
 
     }
@@ -94,22 +96,22 @@ public class PanelTags extends javax.swing.JPanel {
 
         add(item, getComponentCount() - 1);
 //       event.onAddItem(item, item.getText());
-        tags.clear();
-        tags = getAllItem();
+         if(!tags.contains(item.getText())) tags.add(item.getText());
+        
 
         refresh();
         if (NotesPreviewScrollPanel.Instance != null) {
             NotesPreviewScrollPanel.Instance.loadNotes();
         }
-
     }
 
-    private void loadTagsFromDB() {
-        for (String tag : DatabaseHelper.tags){
-            System.out.println("DB: " + tag);
+    public void loadTagsFromDB(ArrayList<String> tags) {
+        this.tags = tags;
+        for(int i = 0; i < tags.size(); i++){
+            System.out.println("DB: " + tags.get(i));
             Color color = tagsColor.removeLast();
-            createNewTag(tag, color);
-
+            createNewTag(tags.get(i), color);
+            System.err.println("panel tag");
         }
     }
 

@@ -5,6 +5,7 @@
 package paneltags;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +17,13 @@ public class tagsPanel extends javax.swing.JPanel {
     /**
      * Creates new form tagsPanel
      */
+    
+    public void loadTagsFromDB(ArrayList<String> tags)
+    {
+        panelTags1.loadTagsFromDB(tags);
+        System.out.println("panelTag");
+    }
+    
     public tagsPanel() {
         initComponents();
         panelTags1.addEventTags(new EventTags() {
@@ -98,9 +106,6 @@ public class tagsPanel extends javax.swing.JPanel {
         panelBorder1.setOpaque(true);
 
         panelTags1.setBackground(new java.awt.Color(20, 18, 24));
-        panelTags1.setToolTipText("");
-        panelTags1.setMaximumSize(new java.awt.Dimension(170, 110));
-        panelTags1.setPreferredSize(new java.awt.Dimension(170, 110));
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -108,14 +113,14 @@ public class tagsPanel extends javax.swing.JPanel {
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelTags1, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                .addComponent(panelTags1, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
-                .addContainerGap(7, Short.MAX_VALUE)
-                .addComponent(panelTags1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(panelTags1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 

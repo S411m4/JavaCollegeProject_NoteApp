@@ -118,7 +118,7 @@ public class NotesPreviewScrollPanel extends javax.swing.JPanel {
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(notesPreviewScrollPanel)
-                .addContainerGap(285, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

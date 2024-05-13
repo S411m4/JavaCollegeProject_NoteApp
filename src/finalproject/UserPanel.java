@@ -4,7 +4,11 @@
  */
 package finalproject;
 
+import DatabaseHelpers.DatabaseHelper;
 import AnalyticsDashboard.AnalyticsApp;
+import java.util.ArrayList;
+import paneltags.PanelTags;
+import paneltags.TagService;
 
 /**
  *
@@ -15,8 +19,17 @@ public class UserPanel extends javax.swing.JPanel {
     /**
      * Creates new form UserPanel
      */
+    
+    private TagService tagService;
+    
     public UserPanel() {
         initComponents();
+        this.tagService = new TagService();
+        
+        ArrayList<String> tags = tagService.fetchTags();
+        tagsPanel1.loadTagsFromDB(tags);
+        System.out.println("User load tags");
+        
     }
 
     /**
@@ -32,8 +45,8 @@ public class UserPanel extends javax.swing.JPanel {
         userInfo = new javax.swing.JPanel();
         userName = new javax.swing.JTextField();
         userImage = new customSwingComponents.PanelBorder();
-        tagsPanel1 = new paneltags.tagsPanel();
         jButton1 = new javax.swing.JButton();
+        tagsPanel1 = new paneltags.tagsPanel();
 
         setMinimumSize(new java.awt.Dimension(100, 100));
         setOpaque(false);
@@ -69,8 +82,6 @@ public class UserPanel extends javax.swing.JPanel {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        tagsPanel1.setBackground(new java.awt.Color(20, 18, 24));
-
         jButton1.setBackground(new java.awt.Color(20, 18, 24));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/flat-color-icons_combo-chart.png"))); // NOI18N
         jButton1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "analytics", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe Print", 0, 12), new java.awt.Color(230, 224, 233))); // NOI18N
@@ -80,21 +91,23 @@ public class UserPanel extends javax.swing.JPanel {
             }
         });
 
+        tagsPanel1.setForeground(new java.awt.Color(230, 224, 233));
+
         javax.swing.GroupLayout userInfoLayout = new javax.swing.GroupLayout(userInfo);
         userInfo.setLayout(userInfoLayout);
         userInfoLayout.setHorizontalGroup(
             userInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userInfoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(userInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tagsPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(userInfoLayout.createSequentialGroup()
-                        .addComponent(userImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(userName, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(userImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(userName, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(14, Short.MAX_VALUE))
+            .addGroup(userInfoLayout.createSequentialGroup()
+                .addComponent(tagsPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         userInfoLayout.setVerticalGroup(
             userInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,8 +118,7 @@ public class UserPanel extends javax.swing.JPanel {
                     .addComponent(userImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(userName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tagsPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addComponent(tagsPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout panelBorder3Layout = new javax.swing.GroupLayout(panelBorder3);
