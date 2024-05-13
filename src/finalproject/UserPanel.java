@@ -28,7 +28,6 @@ public class UserPanel extends javax.swing.JPanel {
         
         ArrayList<String> tags = tagService.fetchTags();
         tagsPanel1.loadTagsFromDB(tags);
-        System.out.println("User load tags");
         
     }
 

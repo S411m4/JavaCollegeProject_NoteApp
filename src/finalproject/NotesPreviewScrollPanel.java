@@ -34,31 +34,22 @@ public class NotesPreviewScrollPanel extends javax.swing.JPanel {
         
     }
     
-    public void updateNotesTags()
-    {
-        for(NotePreviewPanel notePreview: notesPreview)
-        {
-            
-        }
-    }
+   
     
-    public void loadNotes()
-    {
-        notesPreviewList.removeAll();
-        notesPreview.clear();
-        for(NoteModel note : DatabaseHelper.notes)
-        {
-            NotePreviewPanel preview = new NotePreviewPanel(note);
-            notesPreview.add(preview);
-            if(PanelTags.tags != null)
-                preview.updateTags(PanelTags.tags);
-            notesPreviewList.add(preview);
-            //System.out.println("Loaded: " + note);
+   public void loadNotes() {
+    notesPreviewList.removeAll();
+    notesPreview.clear();
+    for (NoteModel note : DatabaseHelper.notes) {
+        NotePreviewPanel preview = new NotePreviewPanel(note);
+        notesPreview.add(preview);
+        if (PanelTags.tags != null) {
+            preview.updateTags(PanelTags.tags, note.getTag());
         }
-        revalidate();
-        repaint();
+        notesPreviewList.add(preview);
     }
-
+    revalidate();
+    repaint();
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

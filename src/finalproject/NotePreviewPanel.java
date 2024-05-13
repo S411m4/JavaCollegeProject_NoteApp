@@ -18,67 +18,95 @@ import models.NoteModel;
  *
  * @author salma
  */
-public class NotePreviewPanel extends javax.swing.JPanel{
+public class NotePreviewPanel extends javax.swing.JPanel {
 
     private NoteModel note;
+
     /**
      * Creates new form NotePanel
      */
-    public void updateTags(List<String> newTags) {
-        tagsComboBox.removeAllItems();//clear existing items
-        for(String tag: newTags)
-            tagsComboBox.addItem(tag);
+   public void updateTags(List<String> newTags, String currentTag) {
+    tagsComboBox.removeAllItems(); // Clear existing items
+    for (String tag : newTags) {
+        tagsComboBox.addItem(tag);
     }
-    public NotePreviewPanel(NoteModel note) {
+    // Set selected item based on note model's tag immediately after updating
+    tagsComboBox.setSelectedItem(currentTag);
+}
+     
+  public NotePreviewPanel(NoteModel note) {
         this.note = note;
         initComponents();
+        setupUI();
+        updateUIFromModel();
+    }
+    
+    
+    private void setupUI() {
         noteContent.setBackground(Color.white);
         noteContent.setForeground(Color.black);
         noteContent.setFont(new Font("Segoe Print", Font.PLAIN, 12));
         noteTitle.setFont(new Font("Segoe Print", Font.BOLD, 48));
-
         noteTitle.setText(note.getTitle());
         noteContent.setText(note.getContent());
-        
+
         String lastEditedDateString = note.getLastEditedDate() == null ? note.getCreatedDate() : note.getLastEditedDate();
         lastEdited.setText(lastEditedDateString);
         createdDate.setText(note.getCreatedDate());
         
         tagsComboBox.addActionListener(e -> updateTag());
-        
-           noteContent.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-            }
 
+        noteContent.addKeyListener(new KeyListener() {
             @Override
-            public void keyPressed(KeyEvent e) {
-            }
-
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {}
             @Override
             public void keyReleased(KeyEvent e) {
-                // Check if Ctrl+S is pressed
                 if (e.getKeyCode() == KeyEvent.VK_S && e.isControlDown()) {
-                    // Call your Create function here
-                    //System.out.println("Save from shortcut");
                     save();
                 }
-
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    //System.out.println("AutoSave");
                     save();
                 }
             }
         });
     }
-    
-    private void updateTag()
-    {
-        String selectedTag = (String) tagsComboBox.getSelectedItem();
-        note.setTag(selectedTag);
-        note.Save();
+
+    private void updateUIFromModel() {
+        noteTitle.setText(note.getTitle());
+        noteContent.setText(note.getContent());
+        setTagSelection();
     }
-    
+
+   private void setTagSelection() {
+        // Ensure this is called after updateTags
+        if (note.getTag() != null && !note.getTag().isEmpty()) {
+            tagsComboBox.setSelectedItem(note.getTag());
+            System.out.println("SetSelectionTag: " + note.getTag());
+        }
+    }
+    private void updateTag() {
+        System.out.println("note: " + this.note.getTitle());
+        String selectedTag = (String) tagsComboBox.getSelectedItem();
+                    System.out.println("before: " + selectedTag + " , "+ note.getTag());
+        if (selectedTag != null && !selectedTag.equals(note.getTag())) {
+                    System.out.println("in condition tag: " + selectedTag + " , "+ note.getTag());
+
+        }
+        else if(selectedTag == null)
+        {
+            System.out.println("Setting tag: " + note.getTag() );
+            selectedTag = note.getTag();
+            setTagSelection();
+        }
+               note.setTag(selectedTag);
+
+                    note.Save();
+                    System.out.println("after: " + selectedTag + " , "+ note.getTag());
+
+    }
+
     private void save() {
         note.setTitle(noteTitle.getText());
         note.setContent(noteContent.getText());
@@ -299,16 +327,15 @@ public class NotePreviewPanel extends javax.swing.JPanel{
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void deleteNoteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteNoteBtnActionPerformed
-        
+
         String answer = JOptionPane.showInputDialog(this, "Enter delete to (delete) note: ");
-        
-        if(answer.toLowerCase().compareTo("delete") == 0)
-        {
+
+        if (answer.toLowerCase().compareTo("delete") == 0) {
             note.Delete();
-            NotesPreviewScrollPanel.Instance.loadNotes();   
+            NotesPreviewScrollPanel.Instance.loadNotes();
         }
-        
-       
+
+
     }//GEN-LAST:event_deleteNoteBtnActionPerformed
 
 
@@ -329,5 +356,4 @@ public class NotePreviewPanel extends javax.swing.JPanel{
     private javax.swing.JComboBox<String> tagsComboBox;
     // End of variables declaration//GEN-END:variables
 
-    
 }

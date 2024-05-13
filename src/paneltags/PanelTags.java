@@ -56,7 +56,6 @@ public class PanelTags extends javax.swing.JPanel {
         });
         add(input);
                 
-        System.out.println("Loaded");
 
 
 
@@ -108,10 +107,8 @@ public class PanelTags extends javax.swing.JPanel {
     public void loadTagsFromDB(ArrayList<String> tags) {
         this.tags = tags;
         for(int i = 0; i < tags.size(); i++){
-            System.out.println("DB: " + tags.get(i));
             Color color = tagsColor.removeLast();
             createNewTag(tags.get(i), color);
-            System.err.println("panel tag");
         }
     }
 

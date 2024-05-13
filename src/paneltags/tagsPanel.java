@@ -21,7 +21,6 @@ public class tagsPanel extends javax.swing.JPanel {
     public void loadTagsFromDB(ArrayList<String> tags)
     {
         panelTags1.loadTagsFromDB(tags);
-        System.out.println("panelTag");
     }
     
     public tagsPanel() {
@@ -29,17 +28,14 @@ public class tagsPanel extends javax.swing.JPanel {
         panelTags1.addEventTags(new EventTags() {
             @Override
             public void onAddItem(Item item, String text) {
-                System.out.println("Add Item : " + text);
             }
 
             @Override
             public void onKeyType(Item item, String text, KeyEvent evt) {
-                System.out.println("Key Type : " + text);
             }
 
             @Override
             public void onItemRemove(Item item, String text) {
-                System.out.println("Item Remove : " + text);
             }
 
             @Override
