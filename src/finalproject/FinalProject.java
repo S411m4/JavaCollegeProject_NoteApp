@@ -7,7 +7,6 @@ package finalproject;
 import AnalyticsDashboard.AnalyticsApp;
 import DatabaseHelpers.DatabaseHelper;
 
-
 /**
  *
  * @author salma
@@ -21,16 +20,12 @@ public class FinalProject {
 
         DatabaseHelper.setupDatabase();
         DatabaseHelper.getAllTags();
-        
 
-        
-        
-       HomeFrame home = new HomeFrame();
-       home.runClass();
-       
-               //AnalyticsApp.setupTheme();
+        HomeFrame home = new HomeFrame();
+        home.runClass();
 
-       
+        AnalyticsApp.setupTheme();
+
     }
- 
+
 }

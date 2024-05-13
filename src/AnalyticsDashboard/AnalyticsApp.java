@@ -23,7 +23,6 @@ public final class AnalyticsApp extends JFrame {
 
     public AnalyticsApp() {  
 
-        setupTheme();
         init();
     }
 

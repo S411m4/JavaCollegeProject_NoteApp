@@ -70,8 +70,9 @@ public class CalenderCustom extends javax.swing.JPanel {
         slide = new customSwingComponents.PanelSlide();
         okBtn = new com.markbean.notes.customGUIComponents.RoundedButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(51, 51, 51));
 
+        cmdBack.setBackground(new java.awt.Color(51, 51, 51));
         cmdBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/back.png"))); // NOI18N
         cmdBack.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         cmdBack.setContentAreaFilled(false);
@@ -82,6 +83,7 @@ public class CalenderCustom extends javax.swing.JPanel {
             }
         });
 
+        cmdNext.setForeground(new java.awt.Color(51, 51, 51));
         cmdNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/next.png"))); // NOI18N
         cmdNext.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         cmdNext.setContentAreaFilled(false);
@@ -92,8 +94,9 @@ public class CalenderCustom extends javax.swing.JPanel {
             }
         });
 
+        lbMonthYear.setBackground(new java.awt.Color(51, 51, 51));
         lbMonthYear.setFont(new java.awt.Font("SansSerif", 1, 30)); // NOI18N
-        lbMonthYear.setForeground(new java.awt.Color(97, 49, 237));
+        lbMonthYear.setForeground(new java.awt.Color(103, 80, 164));
         lbMonthYear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbMonthYear.setText("Month - Year");
 
@@ -109,7 +112,7 @@ public class CalenderCustom extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(cmdBack, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbMonthYear, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
+                .addComponent(lbMonthYear, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cmdNext, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -125,9 +128,17 @@ public class CalenderCustom extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        slide.setBackground(new java.awt.Color(137, 137, 137));
+
+        okBtn.setBackground(new java.awt.Color(103, 80, 164));
         okBtn.setBorder(null);
+        okBtn.setForeground(new java.awt.Color(255, 255, 255));
         okBtn.setText("OK");
+        okBtn.setBorderColor(new java.awt.Color(103, 80, 164));
         okBtn.setBorderPainted(false);
+        okBtn.setColor(new java.awt.Color(103, 80, 164));
+        okBtn.setColorClick(new java.awt.Color(69, 55, 107));
+        okBtn.setColorOver(new java.awt.Color(69, 55, 107));
         okBtn.setRadius(15);
         okBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,7 +150,7 @@ public class CalenderCustom extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(layeredPane)
                     .addGroup(layout.createSequentialGroup()
@@ -148,19 +159,19 @@ public class CalenderCustom extends javax.swing.JPanel {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(95, 95, 95)
-                .addComponent(okBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(okBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(95, 95, 95))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(layeredPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(slide, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(okBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(20, 20, 20)
+                .addComponent(okBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
     }// </editor-fold>//GEN-END:initComponents
 
