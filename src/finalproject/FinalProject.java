@@ -28,7 +28,7 @@ public class FinalProject {
        HomeFrame home = new HomeFrame();
        home.runClass();
        
-               AnalyticsApp.setupTheme();
+               //AnalyticsApp.setupTheme();
 
        
     }

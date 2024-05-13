@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import customSwingComponents.PanelSlide;
 import com.raven.swing.TimePicker;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -31,9 +32,17 @@ public class CalenderCustom extends javax.swing.JPanel {
         initComponents();
         setTitleDate();
          panelDate = new PanelDate(month, year);
-         slide.show(panelDate, PanelSlide.AnimateType.TO_RIGHT);
+         panelDate.setVisible(true);
+        slide.show(panelDate, PanelSlide.AnimateType.TO_LEFT);
+        
+        //to fix panel slide disappear problem, DON"T REMOVE
+        slide.resize(100, 100);
+
+
+
         showMonthYear();
         panelDate.setMonthYear(month, year);
+        
    
          timePicker.addActionListener(new ActionListener() {
             @Override
@@ -45,8 +54,7 @@ public class CalenderCustom extends javax.swing.JPanel {
                 task.Save();
             }
         });
-         
-    }
+}
     
   
 

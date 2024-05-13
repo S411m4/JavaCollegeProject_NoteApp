@@ -27,7 +27,7 @@ public class PanelSlide extends javax.swing.JPanel {
             }
 
         });
-        timer = new Timer(0, new ActionListener() {
+        timer = new Timer(10, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 animate();
@@ -40,7 +40,8 @@ public class PanelSlide extends javax.swing.JPanel {
     private Component comExit;
     private Component comShow;
     private AnimateType animateType;
-    private int animate = 10;
+    private int animate = 15;
+
 
     public void show(Component com, AnimateType animateType) {
         if (!timer.isRunning()) {
@@ -92,6 +93,7 @@ public class PanelSlide extends javax.swing.JPanel {
             }
         }
     }
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
