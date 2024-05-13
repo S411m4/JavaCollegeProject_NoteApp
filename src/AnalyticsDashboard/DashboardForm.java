@@ -5,6 +5,7 @@
  */
 package AnalyticsDashboard;
 
+import DatabaseHelpers.DatabaseHelper;
 import com.formdev.flatlaf.FlatClientProperties;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -28,7 +29,6 @@ import raven.chart.data.pie.DefaultPieDataset;
 import raven.chart.line.LineChart;
 import raven.chart.pie.PieChart;
 
-
 /**
  *
  * @author Dell
@@ -51,7 +51,7 @@ public class DashboardForm extends SimpleForm {
 
     @Override
     public void formInitAndOpen() {
-        
+
     }
 
     @Override
@@ -60,8 +60,8 @@ public class DashboardForm extends SimpleForm {
 
     private void init() {
         setLayout(new MigLayout("wrap,fill,gap 10", "fill"));
-        
-          // Title bar with close button
+
+        // Title bar with close button
         JPanel titleBar = new JPanel(new BorderLayout());
         titleBar.setBackground(new Color(30, 30, 30)); // Dark color for the title bar
         JLabel titleLabel = new JLabel("Dashboard");
@@ -82,8 +82,7 @@ public class DashboardForm extends SimpleForm {
         titleBar.add(titleLabel, BorderLayout.CENTER);
         titleBar.add(closeButton, BorderLayout.EAST);
         add(titleBar, "span, growx"); // Ensure the title bar spans the entire width
-        
-        
+
         createPieChart();
         createLineChart();
         createBarChart();
@@ -113,15 +112,17 @@ public class DashboardForm extends SimpleForm {
         add(pieChart2, "height 290");
 
         pieChart3 = new PieChart();
-        JLabel header3 = new JLabel("Summar Vacation");
+        JLabel header3 = new JLabel("Notes Tags");
         header3.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:+1");
         pieChart3.setHeader(header3);
-        pieChart3.getChartColor().addColor(Color.decode("#f87171"), Color.decode("#fb923c"), Color.decode("#fbbf24"), Color.decode("#a3e635"), Color.decode("#34d399"), Color.decode("#22d3ee"), Color.decode("#818cf8"), Color.decode("#c084fc"));
+
+        pieChart3.getChartColor().addColor(Color.decode("#FFB900"), Color.decode("#0063B1"), Color.decode("#68768A"), Color.decode("#D13438"), Color.decode("#744DA9"), Color.decode("#107C10"));
+
         pieChart3.setChartType(PieChart.ChartType.DONUT_CHART);
         pieChart3.putClientProperty(FlatClientProperties.STYLE, ""
                 + "border:5,5,5,5,$Component.borderColor,,20");
-        pieChart3.setDataset(createPieData());
+        pieChart3.setDataset(getNoteTagsData());
         add(pieChart3, "height 290");
     }
 
@@ -145,10 +146,10 @@ public class DashboardForm extends SimpleForm {
         barChart1.setBarColor(Color.decode("#f97316"));
         barChart1.setDataset(createData());
         JPanel panel1 = new JPanel(new BorderLayout());
-        panel1.setBackground(new Color(20,18,24));
+        panel1.setBackground(new Color(20, 18, 24));
 
         //panel1.putClientProperty(FlatClientProperties.STYLE, ""
-               // + "border:5,5,5,5,$Component.borderColor,,20");
+        // + "border:5,5,5,5,$Component.borderColor,,20");
         panel1.add(barChart1);
         add(panel1, "split 2,gap 0 20");
 
@@ -191,6 +192,7 @@ public class DashboardForm extends SimpleForm {
         dataset.addValue("December", random.nextInt(100));
         return dataset;
     }
+
     private DefaultPieDataset createPieData() {
         DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
         Random random = new Random();
@@ -199,23 +201,44 @@ public class DashboardForm extends SimpleForm {
         dataset.addValue("August", random.nextInt(100) + 50);
         dataset.addValue("September", random.nextInt(100) + 50);
         dataset.addValue("October", random.nextInt(100) + 50);
-        
+
         return dataset;
     }
-private DefaultPieDataset createPieData2() {
+
+    private DefaultPieDataset createPieData2() {
         DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
         Random random = new Random();
         dataset.addValue("January", random.nextInt(100) + 50);
         dataset.addValue("February", random.nextInt(100) + 50);
-        
+
         return dataset;
     }
+
     private DefaultPieDataset createPieData3() {
         DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
         Random random = new Random();
         dataset.addValue("Done", random.nextInt(100) + 50);
         dataset.addValue("Not Done", random.nextInt(100) + 50);
-       
+
+        return dataset;
+    }
+
+    private DefaultPieDataset getNoteTagsData() {
+        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
+
+        var databaseData = DatabaseHelper.getNotesCountByTag();
+
+        for(var key : databaseData.keySet())
+        {
+            System.out.println("key: " + key + ", value: " + databaseData.get(key));
+            
+            int value = databaseData.get(key);
+            
+            if(value > 0)
+            {
+                dataset.addValue(key, value);
+            }
+        }
         return dataset;
     }
 

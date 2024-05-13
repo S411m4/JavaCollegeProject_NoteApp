@@ -83,27 +83,27 @@ public class NotePreviewPanel extends javax.swing.JPanel {
         // Ensure this is called after updateTags
         if (note.getTag() != null && !note.getTag().isEmpty()) {
             tagsComboBox.setSelectedItem(note.getTag());
-            System.out.println("SetSelectionTag: " + note.getTag());
+//            System.out.println("SetSelectionTag: " + note.getTag());
         }
     }
     private void updateTag() {
-        System.out.println("note: " + this.note.getTitle());
+//        System.out.println("note: " + this.note.getTitle());
         String selectedTag = (String) tagsComboBox.getSelectedItem();
-                    System.out.println("before: " + selectedTag + " , "+ note.getTag());
+//                    System.out.println("before: " + selectedTag + " , "+ note.getTag());
         if (selectedTag != null && !selectedTag.equals(note.getTag())) {
-                    System.out.println("in condition tag: " + selectedTag + " , "+ note.getTag());
+//                    System.out.println("in condition tag: " + selectedTag + " , "+ note.getTag());
 
         }
         else if(selectedTag == null)
         {
-            System.out.println("Setting tag: " + note.getTag() );
+//            System.out.println("Setting tag: " + note.getTag() );
             selectedTag = note.getTag();
             setTagSelection();
         }
                note.setTag(selectedTag);
 
                     note.Save();
-                    System.out.println("after: " + selectedTag + " , "+ note.getTag());
+//                    System.out.println("after: " + selectedTag + " , "+ note.getTag());
 
     }
 

@@ -19,7 +19,7 @@ public class PanelTags extends javax.swing.JPanel {
     private EventTags event;
 
     public static ArrayList<String> tags = new ArrayList<String>();
-    private ArrayList<Color> tagsColor = new ArrayList<Color>(Arrays.asList(Color.gray, Color.yellow, Color.magenta, Color.cyan, Color.red, Color.green));
+    private ArrayList<Color> tagsColor = new ArrayList<Color>(Arrays.asList(Color.decode("#FFB900"), Color.decode("#0063B1"), Color.decode("#68768A"), Color.decode("#D13438"), Color.decode("#744DA9"), Color.decode("#107C10")));
 
     public void addEventTags(EventTags event) {
         this.event = event;
@@ -30,6 +30,7 @@ public class PanelTags extends javax.swing.JPanel {
         initComponents();
         init();
     }
+
 
     private void init() {
         setBackground(Color.WHITE);

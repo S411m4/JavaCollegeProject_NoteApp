@@ -17,6 +17,14 @@ public class Item extends javax.swing.JLayeredPane {
     
     
 
+    private int notesCount= 0;
+    
+    public void setNotesCount(int count)
+    {
+        this.notesCount = count;
+        notesCountLabel.setText(Integer.toString(count));
+    }
+    
     public boolean isInput() {
         return input;
     }
@@ -87,6 +95,7 @@ public class Item extends javax.swing.JLayeredPane {
 
         txt = new Text();
         cmd = new javax.swing.JButton();
+        notesCountLabel = new javax.swing.JLabel();
 
         addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -132,26 +141,36 @@ public class Item extends javax.swing.JLayeredPane {
             }
         });
 
+        notesCountLabel.setBackground(new java.awt.Color(20, 18, 24));
+        notesCountLabel.setForeground(new java.awt.Color(255, 255, 255));
+        notesCountLabel.setText("1");
+
         setLayer(txt, javax.swing.JLayeredPane.DEFAULT_LAYER);
         setLayer(cmd, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        setLayer(notesCountLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(3, 3, 3)
-                .addComponent(txt, javax.swing.GroupLayout.DEFAULT_SIZE, 11, Short.MAX_VALUE)
+                .addGap(2, 2, 2)
+                .addComponent(txt, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmd, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(cmd, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(notesCountLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(notesCountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(cmd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -280,6 +299,7 @@ public class Item extends javax.swing.JLayeredPane {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmd;
+    private javax.swing.JLabel notesCountLabel;
     private javax.swing.JTextArea txt;
     // End of variables declaration//GEN-END:variables
 }
