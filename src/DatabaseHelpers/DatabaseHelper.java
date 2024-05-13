@@ -112,7 +112,8 @@ public class DatabaseHelper {
                             + " title text,\n"
                             + " state bool,\n"
                             + " createdDate datetime DEFAULT CURRENT_TIMESTAMP,\n"
-                            + " dueDateTime text\n"
+                            + " dueDateTime datetime,\n"
+                            + " finishedDate datetime \n"
                             + ");";
                     stmt.execute(sql);
                     notes = getAllNotes();

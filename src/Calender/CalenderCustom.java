@@ -47,11 +47,14 @@ public class CalenderCustom extends javax.swing.JPanel {
          timePicker.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Time Selected " + timePicker.getSelectedTime());
-                dueDateTimeString += timePicker.getSelectedTime();
+                        String timeWithoutAMPM = timePicker.getSelectedTime().replaceAll("\\s*(AM|PM)$", "");
+
+                dueDateTimeString += timeWithoutAMPM;
                 DueDateBtn.setToolTipText(dueDateTimeString);
                 task.setDueDateTime(dueDateTimeString);
                 task.Save();
+                
+                System.out.println("due date: " + dueDateTimeString);
             }
         });
 }
@@ -204,7 +207,7 @@ public class CalenderCustom extends javax.swing.JPanel {
     private void okBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okBtnActionPerformed
         
         if(panelDate.getSelectedDate() == null) return;
-        dueDateTimeString = panelDate.getSelectedDate() + ", " ;
+        dueDateTimeString = panelDate.getSelectedDate() + " " ;
         
         timePicker.showPopup(null, 10, 10);
         if(parentDialog != null)

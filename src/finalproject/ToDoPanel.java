@@ -160,16 +160,18 @@ public class ToDoPanel extends javax.swing.JPanel {
     
     
     private void clearFinishedTasksBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearFinishedTasksBtnActionPerformed
-        // TODO add your handling code here:
-        for(int i = 0; i < DatabaseHelper.tasks.size(); i++)
-        {
-            if(DatabaseHelper.tasks.get(i).getState() == true)
-            {
-                DatabaseHelper.tasks.get(i).Delete();
-            }
-        }
         
-                    loadTasks();
+//        for(int i = 0; i < DatabaseHelper.tasks.size(); i++)
+//        {
+//            if(DatabaseHelper.tasks.get(i).getState() == true)
+//            {
+//                 //Hide don't delete to have accurate data in analaytics
+
+//               // DatabaseHelper.tasks.get(i).Delete();
+//            }
+//        }
+        
+            loadTasks();
 
     }//GEN-LAST:event_clearFinishedTasksBtnActionPerformed
 
@@ -183,7 +185,8 @@ public class ToDoPanel extends javax.swing.JPanel {
         tasksList.removeAll();
         for(TaskModel task : DatabaseHelper.tasks)
         {
-            tasksList.add(new TaskPanel(task));
+            if(task.getState() == false) //task did not complete yet
+                tasksList.add(new TaskPanel(task));
         }
         revalidate();
         repaint();
