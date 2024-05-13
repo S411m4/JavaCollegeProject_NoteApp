@@ -48,8 +48,7 @@ public class TaskPanel extends javax.swing.JPanel {
                 this.setDueDateBtn.setToolTipText(task.getDueDateTime());
 
         //reset style of checkbox to override flatlaf style
-        taskDone.setUI(new MetalCheckBoxUI());
-        taskDone.setForeground(Color.gray);
+        
         
 
         if (this.task.getState()) {
@@ -95,8 +94,7 @@ public class TaskPanel extends javax.swing.JPanel {
 
         setOpaque(false);
 
-        taskDone.setBackground(new java.awt.Color(208, 188, 255));
-        taskDone.setForeground(new java.awt.Color(56, 30, 114));
+        taskDone.setBackground(new java.awt.Color(20, 18, 24));
         taskDone.setBorder(null);
         taskDone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
