@@ -150,4 +150,30 @@ public class DatabaseHelper {
 
         return tagCounts;
     }
+
+    public static Map<String, Integer> getOverallTaskCounts() {
+        Map<String, Integer> taskCounts = new HashMap<>();
+        taskCounts.put("done", 0);
+        taskCounts.put("undone", 0);
+
+        String sql = "SELECT state, COUNT(*) as count FROM tasks GROUP BY state;";
+
+        try (Connection conn = DriverManager.getConnection(URL); var pstmt = conn.prepareStatement(sql)) {
+            var rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                int state = rs.getInt("state");
+                int count = rs.getInt("count");
+                if (state == 1) {
+                    taskCounts.put("done", count);
+                } else if (state == 0) {
+                    taskCounts.put("undone", count);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return taskCounts;
+    }
 }

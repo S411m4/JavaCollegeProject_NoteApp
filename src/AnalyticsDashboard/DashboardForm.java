@@ -101,14 +101,14 @@ public class DashboardForm extends SimpleForm {
         add(pieChart1, "split 3,height 290");
 
         pieChart2 = new PieChart();
-        JLabel header2 = new JLabel("Winter Vacation");
+        JLabel header2 = new JLabel("Overall tasks");
         header2.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:+1");
         pieChart2.setHeader(header2);
-        pieChart2.getChartColor().addColor(Color.decode("#f87171"), Color.decode("#fb923c"), Color.decode("#fbbf24"), Color.decode("#a3e635"), Color.decode("#34d399"), Color.decode("#22d3ee"), Color.decode("#818cf8"), Color.decode("#c084fc"));
+        pieChart2.getChartColor().addColor(Color.decode("#00BA38"), Color.decode("#F87666D"));
         pieChart2.putClientProperty(FlatClientProperties.STYLE, ""
                 + "border:5,5,5,5,$Component.borderColor,,20");
-        pieChart2.setDataset(createPieData2());
+        pieChart2.setDataset(getOverallTasksDoneUnDone());
         add(pieChart2, "height 290");
 
         pieChart3 = new PieChart();
@@ -229,6 +229,25 @@ public class DashboardForm extends SimpleForm {
         var databaseData = DatabaseHelper.getNotesCountByTag();
 
         for(var key : databaseData.keySet())
+        {
+//            System.out.println("key: " + key + ", value: " + databaseData.get(key));
+            
+            int value = databaseData.get(key);
+            
+            if(value > 0)
+            {
+                dataset.addValue(key, value);
+            }
+        }
+        return dataset;
+    }
+    
+    public DefaultPieDataset getOverallTasksDoneUnDone()
+    {
+          DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
+
+        var databaseData = DatabaseHelper.getOverallTaskCounts();
+          for(var key : databaseData.keySet())
         {
             System.out.println("key: " + key + ", value: " + databaseData.get(key));
             
