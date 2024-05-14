@@ -5,6 +5,7 @@
  */
 package AnalyticsDashboard;
 
+import AnalyticsDashboard.DateCalculator;
 import DatabaseHelpers.DatabaseHelper;
 import com.formdev.flatlaf.FlatClientProperties;
 import java.awt.BorderLayout;
@@ -15,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -45,8 +47,7 @@ public class DashboardForm extends SimpleForm {
         pieChart1.startAnimation();
         pieChart2.startAnimation();
         pieChart3.startAnimation();
-        barChart1.startAnimation();
-        barChart2.startAnimation();
+
     }
 
     @Override
@@ -84,8 +85,7 @@ public class DashboardForm extends SimpleForm {
         add(titleBar, "span, growx"); // Ensure the title bar spans the entire width
 
         createPieChart();
-        createLineChart();
-        createBarChart();
+//        createLineChart();
     }
 
     private void createPieChart() {
@@ -123,216 +123,66 @@ public class DashboardForm extends SimpleForm {
         pieChart3.putClientProperty(FlatClientProperties.STYLE, ""
                 + "border:5,5,5,5,$Component.borderColor,,20");
         pieChart3.setDataset(getNoteTagsData());
-        add(pieChart3, "height 290");
+        add(pieChart3, "height 290");  
     }
 
-    private void createLineChart() {
-        lineChart = new LineChart();
-        lineChart.setChartType(LineChart.ChartType.CURVE);
-        lineChart.putClientProperty(FlatClientProperties.STYLE, ""
-                + "border:5,5,5,5,$Component.borderColor,,20");
-        add(lineChart);
-        createLineChartData();
-    }
 
-    private void createBarChart() {
-        // BarChart 1
-        barChart1 = new HorizontalBarChart();
-        JLabel header1 = new JLabel("Achievements");
-        header1.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:+1;"
-                + "border:0,0,5,0");
-        barChart1.setHeader(header1);
-        barChart1.setBarColor(Color.decode("#f97316"));
-        barChart1.setDataset(createData());
-        JPanel panel1 = new JPanel(new BorderLayout());
-        panel1.setBackground(new Color(20, 18, 24));
 
-        //panel1.putClientProperty(FlatClientProperties.STYLE, ""
-        // + "border:5,5,5,5,$Component.borderColor,,20");
-        panel1.add(barChart1);
-        add(panel1, "split 2,gap 0 20");
-
-        // BarChart 2
-        barChart2 = new HorizontalBarChart();
-        JLabel header2 = new JLabel("Achievements");
-        header2.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:+1;"
-                + "border:0,0,5,0");
-        barChart2.setHeader(header2);
-        barChart2.setBarColor(Color.decode("#10b981"));
-        barChart2.setDataset(createData2());
-        JPanel panel2 = new JPanel(new BorderLayout());
-        panel2.putClientProperty(FlatClientProperties.STYLE, ""
-                + "border:5,5,5,5,$Component.borderColor,,20");
-        panel2.add(barChart2);
-        add(panel2);
-    }
-
-    private DefaultPieDataset createData() {
-        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
-        Random random = new Random();
-        dataset.addValue("January", random.nextInt(100));
-        dataset.addValue("February", random.nextInt(100));
-        dataset.addValue("March", random.nextInt(100));
-        dataset.addValue("April", random.nextInt(100));
-        dataset.addValue("May", random.nextInt(100));
-        dataset.addValue("June", random.nextInt(100));
-        return dataset;
-    }
-
-    private DefaultPieDataset createData2() {
-        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
-        Random random = new Random();
-        dataset.addValue("July", random.nextInt(100));
-        dataset.addValue("August", random.nextInt(100));
-        dataset.addValue("September", random.nextInt(100));
-        dataset.addValue("October", random.nextInt(100));
-        dataset.addValue("November", random.nextInt(100));
-        dataset.addValue("December", random.nextInt(100));
-        return dataset;
-    }
-
-    private DefaultPieDataset createPieData() {
-        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
-        Random random = new Random();
-        dataset.addValue("June", random.nextInt(100) + 50);
-        dataset.addValue("July", random.nextInt(100) + 50);
-        dataset.addValue("August", random.nextInt(100) + 50);
-        dataset.addValue("September", random.nextInt(100) + 50);
-        dataset.addValue("October", random.nextInt(100) + 50);
-
-        return dataset;
-    }
-
-    private DefaultPieDataset createPieData2() {
-        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
-        Random random = new Random();
-        dataset.addValue("January", random.nextInt(100) + 50);
-        dataset.addValue("February", random.nextInt(100) + 50);
-
-        return dataset;
-    }
-
-    private DefaultPieDataset createPieData3() {
-        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
-        Random random = new Random();
-        dataset.addValue("Done", random.nextInt(100) + 50);
-        dataset.addValue("Not Done", random.nextInt(100) + 50);
-
-        return dataset;
-    }
 
     private DefaultPieDataset getNoteTagsData() {
         DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
 
         var databaseData = DatabaseHelper.getNotesCountByTag();
 
-        for(var key : databaseData.keySet())
-        {
+        for (var key : databaseData.keySet()) {
 //            System.out.println("key: " + key + ", value: " + databaseData.get(key));
-            
+
             int value = databaseData.get(key);
-            
-            if(value > 0)
-            {
+
+            if (value > 0) {
                 dataset.addValue(key, value);
             }
         }
         return dataset;
     }
-    
-    public DefaultPieDataset getOverallTasksDoneUnDone()
-    {
-          DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
+
+    public DefaultPieDataset getOverallTasksDoneUnDone() {
+        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
 
         var databaseData = DatabaseHelper.getOverallTaskCounts();
-          for(var key : databaseData.keySet())
-        {
+        for (var key : databaseData.keySet()) {
 //            System.out.println("key: " + key + ", value: " + databaseData.get(key));
-            
+
             int value = databaseData.get(key);
-            
-            if(value > 0)
-            {
+
+            if (value > 0) {
+                dataset.addValue(key, value);
+            }
+        }
+        return dataset;
+    }
+
+    public DefaultPieDataset getTodayTaskDoneUnDone() {
+        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
+
+        var databaseData = DatabaseHelper.getTodaysTaskCounts();
+        for (var key : databaseData.keySet()) {
+            System.out.println("key: " + key + ", value: " + databaseData.get(key));
+
+            int value = databaseData.get(key);
+
+            if (value > 0) {
                 dataset.addValue(key, value);
             }
         }
         return dataset;
     }
     
-     public DefaultPieDataset getTodayTaskDoneUnDone()
-    {
-          DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
 
-        var databaseData = DatabaseHelper.getTodaysTaskCounts();
-          for(var key : databaseData.keySet())
-        {
-            System.out.println("key: " + key + ", value: " + databaseData.get(key));
-            
-            int value = databaseData.get(key);
-            
-            if(value > 0)
-            {
-                dataset.addValue(key, value);
-            }
-        }
-        return dataset;
-    }
 
-    private void createLineChartData() {
-        DefaultCategoryDataset<String, String> categoryDataset = new DefaultCategoryDataset<>();
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("MMM dd, yyyy");
-        Random ran = new Random();
-        int randomDate = 30;
-        for (int i = 1; i <= randomDate; i++) {
-            String date = df.format(cal.getTime());
-            categoryDataset.addValue(ran.nextInt(700) + 5, "Income", date);
-            categoryDataset.addValue(ran.nextInt(700) + 5, "Expense", date);
-            categoryDataset.addValue(ran.nextInt(700) + 5, "Profit", date);
 
-            cal.add(Calendar.DATE, 1);
-        }
-
-        /**
-         * Control the legend we do not show all legend
-         */
-        try {
-            Date date = df.parse(categoryDataset.getColumnKey(0));
-            Date dateEnd = df.parse(categoryDataset.getColumnKey(categoryDataset.getColumnCount() - 1));
-
-            DateCalculator dcal = new DateCalculator(date, dateEnd);
-            long diff = dcal.getDifferenceDays();
-
-            double d = Math.ceil((diff / 10f));
-            lineChart.setLegendRenderer(new ChartLegendRenderer() {
-                @Override
-                public Component getLegendComponent(Object legend, int index) {
-                    if (index % d == 0) {
-                        return super.getLegendComponent(legend, index);
-                    } else {
-                        return null;
-                    }
-                }
-            });
-        } catch (ParseException e) {
-            System.err.println(e);
-        }
-
-        lineChart.setCategoryDataset(categoryDataset);
-        lineChart.getChartColor().addColor(Color.decode("#38bdf8"), Color.decode("#fb7185"), Color.decode("#34d399"));
-        JLabel header = new JLabel("Income Data");
-        header.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:+1;"
-                + "border:0,0,5,0");
-        lineChart.setHeader(header);
-    }
-
-    private LineChart lineChart;
-    private HorizontalBarChart barChart1;
-    private HorizontalBarChart barChart2;
     private PieChart pieChart1;
     private PieChart pieChart2;
     private PieChart pieChart3;
+
 }

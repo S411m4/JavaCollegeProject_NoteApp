@@ -133,9 +133,7 @@ public class DatabaseHelper {
         }
     }
 
-    
     //Data Retrive functions for Analytics Dashboard
-    
     public static Map<String, Integer> getNotesCountByTag() {
         Map<String, Integer> tagCounts = new HashMap<>();
         String sql = "SELECT tag, COUNT(*) AS note_count FROM notes GROUP BY tag";
@@ -179,20 +177,18 @@ public class DatabaseHelper {
 
         return taskCounts;
     }
-    
-    public static Map<String, Integer> getTodaysTaskCounts()
-    {
-         Map<String, Integer> taskCounts = new HashMap<>();
+
+    public static Map<String, Integer> getTodaysTaskCounts() {
+        Map<String, Integer> taskCounts = new HashMap<>();
         taskCounts.put("Done", 0);
         taskCounts.put("Not Done", 0);
-        
-          // SQL query to select counts of done and undone tasks created today
-        String sql = "SELECT state, COUNT(*) as count FROM tasks " +
-                     "WHERE date(createdDate) = date('now') " +
-                     "GROUP BY state;";
-        
-          try (Connection conn = DriverManager.getConnection(URL);
-             var pstmt = conn.prepareStatement(sql)) {
+
+        // SQL query to select counts of done and undone tasks created today
+        String sql = "SELECT state, COUNT(*) as count FROM tasks "
+                + "WHERE date(createdDate) = date('now') "
+                + "GROUP BY state;";
+
+        try (Connection conn = DriverManager.getConnection(URL); var pstmt = conn.prepareStatement(sql)) {
             var rs = pstmt.executeQuery();
 
             while (rs.next()) {
@@ -210,5 +206,26 @@ public class DatabaseHelper {
 
         return taskCounts;
     }
-   
+
+    public static Map<String, Integer> getTasksCreatedPerMonth() {
+        Map<String, Integer> tasksPerMonth = new HashMap<>();
+
+        String query = "SELECT strftime('%Y-%m', createdDate) AS month, COUNT(*) AS count "
+                + "FROM tasks GROUP BY month";
+
+        try (Connection conn = DriverManager.getConnection(URL); Statement stmt = conn.createStatement(); var rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                String month = rs.getString("month");
+                int count = rs.getInt("count");
+                tasksPerMonth.put(month, count);
+            }
+        } catch (Exception e) {
+            System.out.println("Database error: " + e.getMessage());
+        }
+
+        return tasksPerMonth;
+    }
+
+
 }
