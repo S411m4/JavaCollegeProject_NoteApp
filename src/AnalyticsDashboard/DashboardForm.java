@@ -90,18 +90,18 @@ public class DashboardForm extends SimpleForm {
 
     private void createPieChart() {
         pieChart1 = new PieChart();
-        JLabel header1 = new JLabel("Yearly Evaluation");
+        JLabel header1 = new JLabel("Today Tasks");
         header1.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:+1");
         pieChart1.setHeader(header1);
-        pieChart1.getChartColor().addColor(Color.decode("#f87171"), Color.decode("#fb923c"), Color.decode("#fbbf24"), Color.decode("#a3e635"), Color.decode("#34d399"), Color.decode("#22d3ee"), Color.decode("#818cf8"), Color.decode("#c084fc"));
+        pieChart1.getChartColor().addColor(Color.decode("#007E33"), Color.decode("#CC0000"));
         pieChart1.putClientProperty(FlatClientProperties.STYLE, ""
                 + "border:5,5,5,5,$Component.borderColor,,20");
-        pieChart1.setDataset(createPieData3());
+        pieChart1.setDataset(getTodayTaskDoneUnDone());
         add(pieChart1, "split 3,height 290");
 
         pieChart2 = new PieChart();
-        JLabel header2 = new JLabel("Overall tasks");
+        JLabel header2 = new JLabel("Overall Tasks");
         header2.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:+1");
         pieChart2.setHeader(header2);
@@ -247,6 +247,25 @@ public class DashboardForm extends SimpleForm {
           DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
 
         var databaseData = DatabaseHelper.getOverallTaskCounts();
+          for(var key : databaseData.keySet())
+        {
+//            System.out.println("key: " + key + ", value: " + databaseData.get(key));
+            
+            int value = databaseData.get(key);
+            
+            if(value > 0)
+            {
+                dataset.addValue(key, value);
+            }
+        }
+        return dataset;
+    }
+    
+     public DefaultPieDataset getTodayTaskDoneUnDone()
+    {
+          DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
+
+        var databaseData = DatabaseHelper.getTodaysTaskCounts();
           for(var key : databaseData.keySet())
         {
             System.out.println("key: " + key + ", value: " + databaseData.get(key));
